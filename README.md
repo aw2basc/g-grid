@@ -1,6 +1,6 @@
 # g-grid
-css grid framework with desktop, mobile and tablet fluid and static widths for responsive design meant to be used semantically as less mixins.
-requires **[less](http://lesscss.org/ "less") grid system**
+css grid framework with desktop, mobile and tablet fluid and static widths for responsive design meant to be used semantically as less mixins.  
+**requires [less](http://lesscss.org/ "less")**
 
 ## usage
 `.grid(@a, @b, fluid, lead/left)`  
