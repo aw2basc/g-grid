@@ -1,0 +1,347 @@
+/* ------------------g-grid----------------- 
+https://github.com/aw2basc/g-grid
+
+Copyright (C) 2012 Justin S Maxwell
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
+
+// desktop vars
+@width-desktop:978px;
+@module-desktop:54px;
+@gutter-desktop:30px;
+@padding-desktop:12px;
+@columns-desktop:12;
+// fluid desktop vars
+@module-desktop-fluid:100% * (@module-desktop / @width-desktop);
+@gutter-desktop-fluid:100% * (@gutter-desktop / @width-desktop);
+@padding-desktop-fluid:100% * (@padding-desktop / (@width-desktop + @padding-desktop * 2));
+
+// tablet vars
+@width-tablet:748px;
+@module-tablet:44px;
+@gutter-tablet:20px;
+@padding-tablet:10px;
+@columns-tablet:12;
+// fluid tablet vars
+@module-tablet-fluid:100% * (@module-tablet / @width-tablet);
+@gutter-tablet-fluid:100% * (@gutter-tablet / @width-tablet);
+@padding-tablet-fluid:100% * (@padding-tablet / (@width-tablet + @padding-tablet * 2));
+
+// mobile vars
+@width-mobile:300px;
+@module-mobile:27px;
+@gutter-mobile:12px;
+@padding-mobile:10px;
+@columns-mobile:8;
+// fluid mobile vars
+@module-mobile-fluid:100% * (@module-mobile / @width-mobile);
+@gutter-mobile-fluid:100% * (@gutter-mobile / @width-mobile);
+@padding-mobile-fluid:100% * (@padding-mobile / (@width-mobile + @padding-mobile * 2));
+
+.grid() {}
+.grid(@a) {}
+.grid(@a, @b) {}
+.grid(@a, @b, @c) {}
+.grid(@a, @b, @c, @d) {}
+// lead column
+.grid(@a) when (@a = lead), (@a = l) {
+	margin-left:0;
+	clear:left;
+}
+// etc
+.grid(@a) when (@a = etc) {
+	float:left;
+	display:inline;
+	min-height:1px;
+}
+// cf
+.grid(@a) when (@a = clearfix), (@a = cf) {
+	zoom:1;
+	&:before { content:""; display:table; }
+	&:after { content:""; display:table; clear:both; }
+}
+// cont
+.grid(@a) when (@a = container), (@a = cont) {
+	margin:0 auto;
+	clear:left;
+	.grid(clearfix);
+}
+
+.grid-props(@a, @w, @m, @g){} 
+.grid-props(@a, @w, @m, @g, @c){} 
+// <<<<
+.grid-props(@a, @w, @m, @g, @c) when not (@c = lead) and ((@m * @a + @g * (@a - 1)) < @w) {
+	width:(@m * @a + @g * (@a - 1));
+	margin-left:@g;
+	.grid(etc);
+}
+// <<<< 1st
+.grid-props(@a, @w, @m, @g, @c) when (@c = lead) and ((@m * @a + @g * (@a - 1)) < @w) {
+	width:(@m * @a + @g * (@a - 1));
+	.grid(lead);
+	.grid(etc);
+}
+// @@@@
+.grid-props(@a, @w, @m, @g, @c) when ((@m * @a + @g * (@a - 1)) >= @w) {
+	width:@w;
+	.grid(cont);	
+}
+
+// desktop
+.grid(@a, desktop) when (isnumber(@a)) {
+	.grid-props(@a, @width-desktop, @module-desktop, @gutter-desktop, false);
+}
+.grid(@a, desktop, lead) when (isnumber(@a)) {
+	.grid-props(@a, @width-desktop, @module-desktop, @gutter-desktop, lead);
+}
+// desktop fluid
+.grid(@a, desktop, fluid) when (isnumber(@a)) {
+	.grid-props(@a, 100%, @module-desktop-fluid, @gutter-desktop-fluid, false);
+}
+.grid(@a, desktop, fluid, lead) when (isnumber(@a)) {
+	.grid-props(@a, 100%, @module-desktop-fluid, @gutter-desktop-fluid, lead);
+}
+
+// tablet
+.grid(@a, tablet) when (isnumber(@a)) {
+	.grid-props(@a, @width-tablet, @module-tablet, @gutter-tablet, false);
+}
+.grid(@a, tablet, lead) when (isnumber(@a)) {
+	.grid-props(@a, @width-tablet, @module-tablet, @gutter-tablet, lead);
+}
+// tablet fluid
+.grid(@a, tablet, fluid) when (isnumber(@a)) {
+	.grid-props(@a, 100%, @module-tablet-fluid, @gutter-tablet-fluid, false);
+}
+.grid(@a, tablet, fluid, lead) when (isnumber(@a)) {
+	.grid-props(@a, 100%, @module-tablet-fluid, @gutter-tablet-fluid, lead);
+}
+
+// mobile
+.grid(@a, mobile) when (isnumber(@a)) {
+	.grid-props(@a, @width-mobile, @module-mobile, @gutter-mobile, false);
+}
+.grid(@a, mobile, lead) when (isnumber(@a)) {
+	.grid-props(@a, @width-mobile, @module-mobile, @gutter-mobile, lead);
+}
+// mobile fluid
+.grid(@a, mobile, fluid) when (isnumber(@a)) {
+	.grid-props(@a, 100%, @module-mobile-fluid, @gutter-mobile-fluid, false);
+}
+.grid(@a, mobile, fluid, lead) when (isnumber(@a)) {
+	.grid-props(@a, 100%, @module-mobile-fluid, @gutter-mobile-fluid, lead);
+}
+
+// g
+.g(){
+	.grid();
+}
+.g(@a){
+	.grid(@a);
+}
+.g(@a, @b){
+	.grid(@a, @b);
+}
+.g(@a, @b, @c){
+	.grid(@a, @b, @c);
+}
+.g(@a, @b, @c, @d){
+	.grid(@a, @b, @c, @d);
+}
+
+// d
+.grid(@a, d) { .grid(@a, desktop); }
+.grid(all, d) { .grid(@columns-desktop, desktop); }
+.grid(a, d) { .grid(@columns-desktop, desktop); }
+.grid(@a, desktop, l) { .grid(@a, desktop, lead); }
+.grid(a, desktop, l) { .grid(@columns-desktop, desktop, lead); }
+.grid(all, desktop, l) { .grid(@columns-desktop, desktop, lead); }
+.grid(@a, d, lead) { .grid(@a, desktop, lead); }
+.grid(a, d, lead) { .grid(@columns-desktop, desktop, lead); }
+.grid(all, d, lead) { .grid(@columns-desktop, desktop, lead); }
+.grid(@a, d, l) { .grid(@a, desktop, lead); }
+.grid(a, d, l) { .grid(@columns-desktop, desktop, lead); }
+.grid(all, d, l) { .grid(@columns-desktop, desktop, lead); }
+.grid(@a, desktop, f) { .grid(@a, desktop, fluid); }
+.grid(a, desktop, f) { .grid(@columns-desktop, desktop, fluid); }
+.grid(all, desktop, f) { .grid(@columns-desktop, desktop, fluid); }
+.grid(@a, d, fluid) { .grid(@a, desktop, fluid); }
+.grid(a, d, fluid) { .grid(@columns-desktop, desktop, fluid); }
+.grid(all, d, fluid) { .grid(@columns-desktop, desktop, fluid); }
+.grid(@a, d, f) { .grid(@a, desktop, fluid); }
+.grid(a, d, f) { .grid(@columns-desktop, desktop, fluid); }
+.grid(all, d, f) { .grid(@columns-desktop, desktop, fluid); }
+.grid(@a, desktop, fluid, f) { .grid(@a, desktop, fluid, lead) }
+.grid(a, desktop, fluid, f) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, desktop, fluid, f) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, desktop, f, lead) { .grid(@a, desktop, fluid, lead) }
+.grid(a, desktop, f, lead) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, desktop, f, lead) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, desktop, f, l) { .grid(@a, desktop, fluid, lead) }
+.grid(a, desktop, f, l) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, desktop, f, l) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, desktop, lead, f) { .grid(@a, desktop, fluid, lead) }
+.grid(a, desktop, lead, f) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, desktop, lead, f) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, desktop, l, fluid) { .grid(@a, desktop, fluid, lead) }
+.grid(a, desktop, l, fluid) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, desktop, l, fluid) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, desktop, l, f) { .grid(@a, desktop, fluid, lead) }
+.grid(a, desktop, l, f) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, desktop, l, f) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, d, fluid, lead) { .grid(@a, desktop, fluid, lead) }
+.grid(a, d, fluid, lead) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, d, fluid, lead) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, d, fluid, l) { .grid(@a, desktop, fluid, lead) }
+.grid(a, d, fluid, l) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, d, fluid, l) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, d, f, lead) { .grid(@a, desktop, fluid, lead) }
+.grid(a, d, f, lead) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, d, f, lead) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, d, f, l) { .grid(@a, desktop, fluid, lead) }
+.grid(a, d, f, l) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, d, f, l) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, d, lead, fluid) { .grid(@a, desktop, fluid, lead) }
+.grid(a, d, lead, fluid) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, d, lead, fluid) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, d, lead, f) { .grid(@a, desktop, fluid, lead) }
+.grid(a, d, lead, f) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, d, lead, f) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, d, l, fluid) { .grid(@a, desktop, fluid, lead) }
+.grid(a, d, l, fluid) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, d, l, fluid) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(@a, d, l, f) { .grid(@a, desktop, fluid, lead) }
+.grid(a, d, l, f) { .grid(@columns-desktop, desktop, fluid, lead) }
+.grid(all, d, l, f) { .grid(@columns-desktop, desktop, fluid, lead) }
+// t
+.grid(@a, t) { .grid(@a, tablet); }
+.grid(a, t) { .grid(@columns-tablet, tablet); }
+.grid(all, t) { .grid(@columns-tablet, tablet); }
+.grid(@a, tablet, l) { .grid(@a, tablet, lead); }
+.grid(a, tablet, l) { .grid(@columns-tablet, tablet, lead); }
+.grid(all, tablet, l) { .grid(@columns-tablet, tablet, lead); }
+.grid(@a, t, lead) { .grid(@a, tablet, lead); }
+.grid(a, t, lead) { .grid(@columns-tablet, tablet, lead); }
+.grid(all, t, lead) { .grid(@columns-tablet, tablet, lead); }
+.grid(@a, t, l) { .grid(@a, tablet, lead); }
+.grid(a, t, l) { .grid(@columns-tablet, tablet, lead); }
+.grid(all, t, l) { .grid(@columns-tablet, tablet, lead); }
+.grid(@a, tablet, f) { .grid(@a, tablet, fluid); }
+.grid(a, tablet, f) { .grid(@columns-tablet, tablet, fluid); }
+.grid(all, tablet, f) { .grid(@columns-tablet, tablet, fluid); }
+.grid(@a, t, fluid) { .grid(@a, tablet, fluid); }
+.grid(a, t, fluid) { .grid(@columns-tablet, tablet, fluid); }
+.grid(all, t, fluid) { .grid(@columns-tablet, tablet, fluid); }
+.grid(@a, t, f) { .grid(@a, tablet, fluid); }
+.grid(a, t, f) { .grid(@columns-tablet, tablet, fluid); }
+.grid(all, t, f) { .grid(@columns-tablet, tablet, fluid); }
+.grid(@a, tablet, fluid, f) { .grid(@a, tablet, fluid, lead) }
+.grid(a, tablet, fluid, f) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, tablet, fluid, f) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, tablet, f, lead) { .grid(@a, tablet, fluid, lead) }
+.grid(a, tablet, f, lead) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, tablet, f, lead) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, tablet, f, l) { .grid(@a, tablet, fluid, lead) }
+.grid(a, tablet, f, l) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, tablet, f, l) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, tablet, lead, f) { .grid(@a, tablet, fluid, lead) }
+.grid(a, tablet, lead, f) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, tablet, lead, f) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, tablet, l, fluid) { .grid(@a, tablet, fluid, lead) }
+.grid(a, tablet, l, fluid) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, tablet, l, fluid) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, tablet, l, f) { .grid(@a, tablet, fluid, lead) }
+.grid(a, tablet, l, f) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, tablet, l, f) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, t, fluid, lead) { .grid(@a, tablet, fluid, lead) }
+.grid(a, t, fluid, lead) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, t, fluid, lead) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, t, fluid, l) { .grid(@a, tablet, fluid, lead) }
+.grid(a, t, fluid, l) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, t, fluid, l) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, t, f, lead) { .grid(@a, tablet, fluid, lead) }
+.grid(a, t, f, lead) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, t, f, lead) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, t, f, l) { .grid(@a, tablet, fluid, lead) }
+.grid(a, t, f, l) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, t, f, l) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, t, lead, fluid) { .grid(@a, tablet, fluid, lead) }
+.grid(a, t, lead, fluid) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, t, lead, fluid) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, t, lead, f) { .grid(@a, tablet, fluid, lead) }
+.grid(a, t, lead, f) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, t, lead, f) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, t, l, fluid) { .grid(@a, tablet, fluid, lead) }
+.grid(a, t, l, fluid) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, t, l, fluid) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(@a, t, l, f) { .grid(@a, tablet, fluid, lead) }
+.grid(a, t, l, f) { .grid(@columns-tablet, tablet, fluid, lead) }
+.grid(all, t, l, f) { .grid(@columns-tablet, tablet, fluid, lead) }
+// m
+.grid(@a, m) { .grid(@a, mobile); }
+.grid(a, m) { .grid(@columns-mobile, mobile); }
+.grid(all, m) { .grid(@columns-mobile, mobile); }
+.grid(@a, mobile, l) { .grid(@a, mobile, lead); }
+.grid(a, mobile, l) { .grid(@columns-mobile, mobile, lead); }
+.grid(all, mobile, l) { .grid(@columns-mobile, mobile, lead); }
+.grid(@a, m, lead) { .grid(@a, mobile, lead); }
+.grid(a, m, lead) { .grid(@columns-mobile, mobile, lead); }
+.grid(all, m, lead) { .grid(@columns-mobile, mobile, lead); }
+.grid(@a, m, l) { .grid(@a, mobile, lead); }
+.grid(a, m, l) { .grid(@columns-mobile, mobile, lead); }
+.grid(all, m, l) { .grid(@columns-mobile, mobile, lead); }
+.grid(@a, mobile, f) { .grid(@a, mobile, fluid); }
+.grid(a, mobile, f) { .grid(@columns-mobile, mobile, fluid); }
+.grid(all, mobile, f) { .grid(@columns-mobile, mobile, fluid); }
+.grid(@a, m, fluid) { .grid(@a, mobile, fluid); }
+.grid(a, m, fluid) { .grid(@columns-mobile, mobile, fluid); }
+.grid(all, m, fluid) { .grid(@columns-mobile, mobile, fluid); }
+.grid(@a, m, f) { .grid(@a, mobile, fluid); }
+.grid(a, m, f) { .grid(@columns-mobile, mobile, fluid); }
+.grid(all, m, f) { .grid(@columns-mobile, mobile, fluid); }
+.grid(@a, mobile, fluid, f) { .grid(@a, mobile, fluid, lead) }
+.grid(a, mobile, fluid, f) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, mobile, fluid, f) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, mobile, f, lead) { .grid(@a, mobile, fluid, lead) }
+.grid(a, mobile, f, lead) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, mobile, f, lead) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, mobile, f, l) { .grid(@a, mobile, fluid, lead) }
+.grid(a, mobile, f, l) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, mobile, f, l) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, mobile, lead, f) { .grid(@a, mobile, fluid, lead) }
+.grid(a, mobile, lead, f) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, mobile, lead, f) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, mobile, l, fluid) { .grid(@a, mobile, fluid, lead) }
+.grid(a, mobile, l, fluid) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, mobile, l, fluid) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, mobile, l, f) { .grid(@a, mobile, fluid, lead) }
+.grid(a, mobile, l, f) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, mobile, l, f) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, m, fluid, lead) { .grid(@a, mobile, fluid, lead) }
+.grid(a, m, fluid, lead) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, m, fluid, lead) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, m, fluid, l) { .grid(@a, mobile, fluid, lead) }
+.grid(a, m, fluid, l) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, m, fluid, l) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, m, f, lead) { .grid(@a, mobile, fluid, lead) }
+.grid(a, m, f, lead) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, m, f, lead) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, m, f, l) { .grid(@a, mobile, fluid, lead) }
+.grid(a, m, f, l) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, m, f, l) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, m, lead, fluid) { .grid(@a, mobile, fluid, lead) }
+.grid(a, m, lead, fluid) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, m, lead, fluid) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, m, lead, f) { .grid(@a, mobile, fluid, lead) }
+.grid(a, m, lead, f) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, m, lead, f) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, m, l, fluid) { .grid(@a, mobile, fluid, lead) }
+.grid(a, m, l, fluid) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, m, l, fluid) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(@a, m, l, f) { .grid(@a, mobile, fluid, lead) }
+.grid(a, m, l, f) { .grid(@columns-mobile, mobile, fluid, lead) }
+.grid(all, m, l, f) { .grid(@columns-mobile, mobile, fluid, lead) }
