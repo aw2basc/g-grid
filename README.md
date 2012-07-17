@@ -3,7 +3,7 @@ g-grid is a css grid framework with fluid and static widths meant to be used sem
 **requires [less](http://lesscss.org/ "less")**
 
 ## usage
-`.grid(@a, @b, @c, @d)`  
+`.g-grid(@a, @b, @c, @d)`  
 `@a` -> 1 - (max number of columns)  
 `@b` -> hd, wide, desktop, tablet, portrait, mobile  
 `@c` -> fluid  
@@ -72,10 +72,10 @@ Mobile - QVGA
 `@media only screen and (max-width: 479px) { }`   
 
 ## examples
-`.grid(3, desktop);` -> 3 cols in desktop grid  
-`.grid(4, desktop, lead);` -> left side column   
-`.grid(12, tablet);` -> max width in tablet  
-`.grid(4, mobile, fluid);` -> 4 cols in fluid mobile grid   
+`.g-grid(3, desktop);` -> 3 cols in desktop grid  
+`.g-grid(4, desktop, lead);` -> left side column   
+`.g-grid(12, tablet);` -> max width in tablet  
+`.g-grid(4, mobile, fluid);` -> 4 cols in fluid mobile grid   
 `.g(3,d,f,l);` -> 3 col width leading col in fluid desktop grid   
 `.g(a,m,f);` -> max width in fluid mobile (100%)    
  
