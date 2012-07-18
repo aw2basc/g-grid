@@ -2,12 +2,22 @@
 g-grid is a css grid framework with fluid and static widths meant to be used semantically as mixins within your stylesheet for responsive design.  
 **requires [less](http://lesscss.org/ "less")**
 
+## features
+6 grid systems  
+static and fluid widths  
+css preprocessor mixins  
+adjust for padding/border  
+simple lead ajustments  
+shorthand  
+semantic  
+
 ## usage
-`.g-grid(@a, @b, @c, @d)`  
+`.g-grid(@a, @b, @c, @d, @e)`  
 `@a` -> 1 - (max number of columns)  
 `@b` -> hd, wide, desktop, tablet, portrait, mobile  
 `@c` -> fluid  
 `@d` -> lead  
+`@e` -> adjustment (padding/border)  
 
 ## shorthand
 `.g()` -> .grid()  
@@ -74,8 +84,9 @@ Mobile - QVGA
 ## examples
 `.g-grid(3, desktop);` -> 3 cols in desktop grid  
 `.g-grid(4, desktop, lead);` -> left side column   
+`.g-grid(4, desktop, lead, -20);` -> left side column adjusted for 10px padding/border l/r   
 `.g-grid(12, tablet);` -> max width in tablet  
 `.g-grid(4, mobile, fluid);` -> 4 cols in fluid mobile grid   
-`.g(3,d,f,l);` -> 3 col width leading col in fluid desktop grid   
 `.g(a,m,f);` -> max width in fluid mobile (100%)    
+`.g(3,d,f,l,-20);` -> 3 col width leading col in fluid desktop grid minus 20px for padding  
  
