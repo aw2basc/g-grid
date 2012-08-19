@@ -17,11 +17,11 @@ g-grid is a css grid system with fluid and static widths meant to be used semant
 `.g-grid(num-columns, grid-system, only);`  
 `.g-grid(clearfix);`  
 
-## <a id="semantic"></a> semantic
+## <a name="semantic"></a> semantic
 g-grid is a mixin meant to be used within your stylesheet.  
 e.g `.container { .g-grid(3,978,lead); }`
 
-## <a id="grids"></a> grids
+## <a name="grids"></a> grids
 1848 - HD - WUXGA  
 `width:1848px;`  
 `module:54px;`   
