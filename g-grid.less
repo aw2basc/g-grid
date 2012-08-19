@@ -1,289 +1,426 @@
-/* ------------------g-grid----------------- 
-https://github.com/aw2basc/g-grid
+// ------------------g-grid----------------- 
+// ----https://github.com/aw2basc/g-grid----
+//
+// Copyright (C) 2012 Justin S Maxwell
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Copyright (C) 2012 Justin S Maxwell
+// HD
+// 1848 grid/WUXGA
+// vars
+@width-1848:1848px;
+@module-1848:54px;
+@gutter-1848:24px;
+@padding-1848:25px;
+@columns-1848:24;
+// fluid vars
+@module-1848-fluid:100% * (@module-1848 / @width-1848);
+@gutter-1848-fluid:100% * (@gutter-1848 / @width-1848);
+@padding-1848-fluid:100% * (@padding-1848 / (@width-1848 + @padding-1848 * 2));
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// props
+.g-grid(@a, 1848) when (isnumber(@a)) {
+	.g-grid-props(@a, @width-1848, @module-1848, @gutter-1848, false);
+}
+.g-grid(all, 1848) {
+	.g-grid-props(@columns-1848, @width-1848, @module-1848, @gutter-1848, false);
+}
+.g-grid(padding, 1848) {
+	.g-grid-padding(@padding-1848);
+}
+.g-grid(padding, 1848, fluid) {
+	.g-grid-padding(@padding-1848-fluid);
+}
+.g-grid(@a, 1848, only) when (isnumber(@a)) {
+	.g-grid-width(@a,@module-1848,@gutter-1848);
+}
+.g-grid(@a, 1848, lead) when (isnumber(@a)) {
+	.g-grid-props(@a, @width-1848, @module-1848, @gutter-1848, lead);
+}
+// fluid
+.g-grid(@a, 1848, fluid) when (isnumber(@a)) {
+	.g-grid-props(@a, 100%, @module-1848-fluid, @gutter-1848-fluid, false);
+}
+.g-grid(@a, 1848, fluid, only) when (isnumber(@a)) {
+	.g-grid-width(@a, @module-1848-fluid, @gutter-1848-fluid);
+}
+.g-grid(@a, 1848, fluid, lead) when (isnumber(@a)) {
+	.g-grid-props(@a, 100%, @module-1848-fluid, @gutter-1848-fluid, lead);
+}
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// h
+.g-grid(@a, h) when not (@a = a)  and not (@a = p) { .g-grid(@a, 1848); }
+.g-grid(@a, h, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 1848, @b); }
+.g-grid(@a, h, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 1848, @b, @c); }
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
+// hd
+.g-grid(@a, hd) when not (@a = a) and not (@a = p) { .g-grid(@a, 1848); }
+.g-grid(@a, hd, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 1848, @b); }
+.g-grid(@a, hd, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 1848, @b, @c); }
 
-// WUXGA vars
-@width-hd:1848px;
-@module-hd:54px;
-@gutter-hd:24px;
-@padding-hd:25px;
-@columns-hd:24;
-// fluid hd vars
-@module-hd-fluid:100% * (@module-hd / @width-hd);
-@gutter-hd-fluid:100% * (@gutter-hd / @width-hd);
-@padding-hd-fluid:100% * (@padding-hd / (@width-hd + @padding-hd * 2));
+// WUXGA
+.g-grid(@a, WUXGA) when not (@a = a) and not (@a = p) { .g-grid(@a, 1848); }
+.g-grid(@a, WUXGA, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 1848, @b); }
+.g-grid(@a, WUXGA, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 1848, @b, @c); }
 
-// WXGA vars
-@width-wide:1314px;
-@module-wide:54px;
-@gutter-wide:30px;
-@padding-wide:15px;
-@columns-wide:16;
+
+// wide
+// 1314 grid/WXGA
+// vars
+@width-1314:1314px;
+@module-1314:54px;
+@gutter-1314:30px;
+@padding-1314:15px;
+@columns-1314:16;
 // fluid wide vars
-@module-wide-fluid:100% * (@module-wide / @width-wide);
-@gutter-wide-fluid:100% * (@gutter-wide / @width-wide);
-@padding-wide-fluid:100% * (@padding-wide / (@width-wide + @padding-wide * 2));
+@module-1314-fluid:100% * (@module-1314 / @width-1314);
+@gutter-1314-fluid:100% * (@gutter-1314 / @width-1314);
+@padding-1314-fluid:100% * (@padding-1314 / (@width-1314 + @padding-1314 * 2));
 
-// XGA vars
-@width-desktop:978px;
-@module-desktop:54px;
-@gutter-desktop:30px;
-@padding-desktop:12px;
-@columns-desktop:12;
+// props
+.g-grid(@a, 1314) when (isnumber(@a)) {
+	.g-grid-props(@a, @width-1314, @module-1314, @gutter-1314, false);
+}
+.g-grid(all, 1314) {
+	.g-grid-props(@columns-1314, @width-1314, @module-1314, @gutter-1314, false);
+}
+.g-grid(padding, 1314) {
+	.g-grid-padding(@padding-1314);
+}
+.g-grid(padding, 1314, fluid) {
+	.g-grid-padding(@padding-1314-fluid);
+}
+.g-grid(@a, 1314, only) when (isnumber(@a)) {
+	.g-grid-width(@a,@module-1314,@gutter-1314);
+}
+.g-grid(@a, 1314, lead) when (isnumber(@a)) {
+	.g-grid-props(@a, @width-1314, @module-1314, @gutter-1314, lead);
+}
+// fluid
+.g-grid(@a, 1314, fluid) when (isnumber(@a)) {
+	.g-grid-props(@a, 100%, @module-1314-fluid, @gutter-1314-fluid, false);
+}
+.g-grid(@a, 1314, fluid, only) when (isnumber(@a)) {
+	.g-grid-width(@a, @module-1314-fluid, @gutter-1314-fluid);
+}
+.g-grid(@a, 1314, fluid, lead) when (isnumber(@a)) {
+	.g-grid-props(@a, 100%, @module-1314-fluid, @gutter-1314-fluid, lead);
+}
+
+// w
+.g-grid(@a, w) when not (@a = a)  and not (@a = p) { .g-grid(@a, 1314); }
+.g-grid(@a, w, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 1314, @b); }
+.g-grid(@a, w, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 1314, @b, @c); }
+
+// wide
+.g-grid(@a, wide) when not (@a = a) and not (@a = p) { .g-grid(@a, 1314); }
+.g-grid(@a, wide, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 1314, @b); }
+.g-grid(@a, wide, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 1314, @b, @c); }
+
+// WXGA
+.g-grid(@a, WXGA) when not (@a = a) and not (@a = p) { .g-grid(@a, 1314); }
+.g-grid(@a, WXGA, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 1314, @b); }
+.g-grid(@a, WXGA, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 1314, @b, @c); }
+
+
+// desktop
+// 978 grid/XGA
+// vars
+@width-978:978px;
+@module-978:54px;
+@gutter-978:30px;
+@padding-978:12px;
+@columns-978:12;
 // fluid desktop vars
-@module-desktop-fluid:100% * (@module-desktop / @width-desktop);
-@gutter-desktop-fluid:100% * (@gutter-desktop / @width-desktop);
-@padding-desktop-fluid:100% * (@padding-desktop / (@width-desktop + @padding-desktop * 2));
+@module-978-fluid:100% * (@module-978 / @width-978);
+@gutter-978-fluid:100% * (@gutter-978 / @width-978);
+@padding-978-fluid:100% * (@padding-978 / (@width-978 + @padding-978 * 2));
 
-// WVGA Landscape vars
-@width-tablet:748px;
-@module-tablet:44px;
-@gutter-tablet:20px;
-@padding-tablet:10px;
-@columns-tablet:12;
+// props
+.g-grid(@a, 978) when (isnumber(@a)) {
+	.g-grid-props(@a, @width-978, @module-978, @gutter-978, false);
+}
+.g-grid(all, 978) {
+	.g-grid-props(@columns-978, @width-978, @module-978, @gutter-978, false);
+}
+.g-grid(padding, 978) {
+	.g-grid-padding(@padding-978);
+}
+.g-grid(padding, 978, fluid) {
+	.g-grid-padding(@padding-978-fluid);
+}
+.g-grid(@a, 978, only) when (isnumber(@a)) {
+	.g-grid-width(@a,@module-978,@gutter-978);
+}
+.g-grid(@a, 978, lead) when (isnumber(@a)) {
+	.g-grid-props(@a, @width-978, @module-978, @gutter-978, lead);
+}
+// fluid
+.g-grid(@a, 978, fluid) when (isnumber(@a)) {
+	.g-grid-props(@a, 100%, @module-978-fluid, @gutter-978-fluid, false);
+}
+.g-grid(@a, 978, fluid, only) when (isnumber(@a)) {
+	.g-grid-width(@a, @module-978-fluid, @gutter-978-fluid);
+}
+.g-grid(@a, 978, fluid, lead) when (isnumber(@a)) {
+	.g-grid-props(@a, 100%, @module-978-fluid, @gutter-978-fluid, lead);
+}
+
+// d
+.g-grid(@a, d) when not (@a = a)  and not (@a = p) { .g-grid(@a, 978); }
+.g-grid(@a, d, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 978, @b); }
+.g-grid(@a, d, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 978, @b, @c); }
+
+// desktop
+.g-grid(@a, desktop) when not (@a = a) and not (@a = p) { .g-grid(@a, 978); }
+.g-grid(@a, desktop, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 978, @b); }
+.g-grid(@a, desktop, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 978, @b, @c); }
+
+// XGA
+.g-grid(@a, XGA) when not (@a = a) and not (@a = p) { .g-grid(@a, 978); }
+.g-grid(@a, XGA, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 978, @b); }
+.g-grid(@a, XGA, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 978, @b, @c); }
+
+
+// tablet
+// 748 grid/WVGA
+// vars
+@width-748:748px;
+@module-748:44px;
+@gutter-748:20px;
+@padding-748:10px;
+@columns-748:12;
 // fluid tablet vars
-@module-tablet-fluid:100% * (@module-tablet / @width-tablet);
-@gutter-tablet-fluid:100% * (@gutter-tablet / @width-tablet);
-@padding-tablet-fluid:100% * (@padding-tablet / (@width-tablet + @padding-tablet * 2));
+@module-748-fluid:100% * (@module-748 / @width-748);
+@gutter-748-fluid:100% * (@gutter-748 / @width-748);
+@padding-748-fluid:100% * (@padding-748 / (@width-748 + @padding-748 * 2));
 
-// WVGA Portrait vars
-@width-portrait:460px;
-@module-portrait:40px;
-@gutter-portrait:20px;
-@padding-portrait:10px;
-@columns-portrait:8;
+// props
+.g-grid(@a, 748) when (isnumber(@a)) {
+	.g-grid-props(@a, @width-748, @module-748, @gutter-748, false);
+}
+.g-grid(all, 748) {
+	.g-grid-props(@columns-748, @width-748, @module-748, @gutter-748, false);
+}
+.g-grid(padding, 748) {
+	.g-grid-padding(@padding-748);
+}
+.g-grid(padding, 748, fluid) {
+	.g-grid-padding(@padding-748-fluid);
+}
+.g-grid(@a, 748, only) when (isnumber(@a)) {
+	.g-grid-width(@a,@module-748,@gutter-748);
+}
+.g-grid(@a, 748, lead) when (isnumber(@a)) {
+	.g-grid-props(@a, @width-748, @module-748, @gutter-748, lead);
+}
+// fluid
+.g-grid(@a, 748, fluid) when (isnumber(@a)) {
+	.g-grid-props(@a, 100%, @module-748-fluid, @gutter-748-fluid, false);
+}
+.g-grid(@a, 748, fluid, only) when (isnumber(@a)) {
+	.g-grid-width(@a, @module-748-fluid, @gutter-748-fluid);
+}
+.g-grid(@a, 748, fluid, lead) when (isnumber(@a)) {
+	.g-grid-props(@a, 100%, @module-748-fluid, @gutter-748-fluid, lead);
+}
+
+// t
+.g-grid(@a, t) when not (@a = a)  and not (@a = p) { .g-grid(@a, 748); }
+.g-grid(@a, t, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 748, @b); }
+.g-grid(@a, t, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 748, @b, @c); }
+
+// tablet
+.g-grid(@a, tablet) when not (@a = a) and not (@a = p) { .g-grid(@a, 748); }
+.g-grid(@a, tablet, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 748, @b); }
+.g-grid(@a, tablet, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 748, @b, @c); }
+
+// WVGA
+.g-grid(@a, WVGA) when not (@a = a) and not (@a = p) { .g-grid(@a, 748); }
+.g-grid(@a, WVGA, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 748, @b); }
+.g-grid(@a, WVGA, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 748, @b, @c); }
+
+
+// portrait
+// 460 grid/HVGA
+// vars
+@width-460:460px;
+@module-460:40px;
+@gutter-460:20px;
+@padding-460:10px;
+@columns-460:8;
 // fluid mobile vars
-@module-portrait-fluid:100% * (@module-portrait / @width-portrait);
-@gutter-portrait-fluid:100% * (@gutter-portrait / @width-portrait);
-@padding-portrait-fluid:100% * (@padding-portrait / (@width-portrait + @padding-portrait * 2));
+@module-460-fluid:100% * (@module-460 / @width-460);
+@gutter-460-fluid:100% * (@gutter-460 / @width-460);
+@padding-460-fluid:100% * (@padding-460 / (@width-460 + @padding-460 * 2));
 
-// QVGA vars
-@width-mobile:300px;
-@module-mobile:27px;
-@gutter-mobile:12px;
-@padding-mobile:10px;
-@columns-mobile:8;
-// fluid mobile vars
-@module-mobile-fluid:100% * (@module-mobile / @width-mobile);
-@gutter-mobile-fluid:100% * (@gutter-mobile / @width-mobile);
-@padding-mobile-fluid:100% * (@padding-mobile / (@width-mobile + @padding-mobile * 2));
+// props
+.g-grid(@a, 460) when (isnumber(@a)) {
+	.g-grid-props(@a, @width-460, @module-460, @gutter-460, false);
+}
+.g-grid(all, 460) {
+	.g-grid-props(@columns-460, @width-460, @module-460, @gutter-460, false);
+}
+.g-grid(padding, 460) {
+	.g-grid-padding(@padding-460);
+}
+.g-grid(padding, 460, fluid) {
+	.g-grid-padding(@padding-460-fluid);
+}
+.g-grid(@a, 460, only) when (isnumber(@a)) {
+	.g-grid-width(@a,@module-460,@gutter-460);
+}
+.g-grid(@a, 460, lead) when (isnumber(@a)) {
+	.g-grid-props(@a, @width-460, @module-460, @gutter-460, lead);
+}
+// fluid
+.g-grid(@a, 460, fluid) when (isnumber(@a)) {
+	.g-grid-props(@a, 100%, @module-460-fluid, @gutter-460-fluid, false);
+}
+.g-grid(@a, 460, fluid, only) when (isnumber(@a)) {
+	.g-grid-width(@a, @module-460-fluid, @gutter-460-fluid);
+}
+.g-grid(@a, 460, fluid, lead) when (isnumber(@a)) {
+	.g-grid-props(@a, 100%, @module-460-fluid, @gutter-460-fluid, lead);
+}
 
+// p
+.g-grid(@a, t) when not (@a = a)  and not (@a = p) { .g-grid(@a, 460); }
+.g-grid(@a, t, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 460, @b); }
+.g-grid(@a, t, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 460, @b, @c); }
+
+// portrait
+.g-grid(@a, tablet) when not (@a = a) and not (@a = p) { .g-grid(@a, 460); }
+.g-grid(@a, tablet, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 460, @b); }
+.g-grid(@a, tablet, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 460, @b, @c); }
+
+// HVGA
+.g-grid(@a, HVGA) when not (@a = a) and not (@a = p) { .g-grid(@a, 460); }
+.g-grid(@a, HVGA, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 460, @b); }
+.g-grid(@a, HVGA, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 460, @b, @c); }
+
+
+// mobile
+// 300 grid/QVGA
+// vars
+@width-300:300px;
+@module-300:27px;
+@gutter-300:12px;
+@padding-300:10px;
+@columns-300:8;
+// fluid 300 vars
+@module-300-fluid:100% * (@module-300 / @width-300);
+@gutter-300-fluid:100% * (@gutter-300 / @width-300);
+@padding-300-fluid:100% * (@padding-300 / (@width-300 + @padding-300 * 2));
+
+// props
+.g-grid(@a, 300) when (isnumber(@a)) {
+	.g-grid-props(@a, @width-300, @module-300, @gutter-300, false);
+}
+.g-grid(all, 300) {
+	.g-grid-props(@columns-300, @width-300, @module-300, @gutter-300, false);
+}
+.g-grid(padding, 300) {
+	.g-grid-padding(@padding-300);
+}
+.g-grid(padding, 300, fluid) {
+	.g-grid-padding(@padding-300-fluid);
+}
+.g-grid(@a, 300, only) when (isnumber(@a)) {
+	.g-grid-width(@a,@module-300,@gutter-300);
+}
+.g-grid(@a, 300, lead) when (isnumber(@a)) {
+	.g-grid-props(@a, @width-300, @module-300, @gutter-300, lead);
+}
+// fluid
+.g-grid(@a, 300, fluid) when (isnumber(@a)) {
+	.g-grid-props(@a, 100%, @module-300-fluid, @gutter-300-fluid, false);
+}
+.g-grid(@a, 300, fluid, only) when (isnumber(@a)) {
+	.g-grid-width(@a, @module-300-fluid, @gutter-300-fluid);
+}
+.g-grid(@a, 300, fluid, lead) when (isnumber(@a)) {
+	.g-grid-props(@a, 100%, @module-300-fluid, @gutter-300-fluid, lead);
+}
+
+// m
+.g-grid(@a, m) when not (@a = a)  and not (@a = p) { .g-grid(@a, 300); }
+.g-grid(@a, m, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 300, @b); }
+.g-grid(@a, m, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 300, @b, @c); }
+
+// mobile
+.g-grid(@a, mobile) when not (@a = a) and not (@a = p) { .g-grid(@a, 300); }
+.g-grid(@a, mobile, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 300, @b); }
+.g-grid(@a, mobile, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 300, @b, @c); }
+
+// QVGA
+.g-grid(@a, QVGA) when not (@a = a) and not (@a = p) { .g-grid(@a, 300); }
+.g-grid(@a, QVGA, @b) when not (@a = p) and not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) { .g-grid(@a, 300, @b); }
+.g-grid(@a, QVGA, @b, @c) when not (@b = l) and not (@b = left) and not (@b = f) and not (@b = flex) and not (@b = o) and not (@c = l) and not (@c = left) and not (@c = f) and not (@c = flex) and not (@c = o) { .g-grid(@a, 300, @b, @c); }
+
+
+// ------------------g-grid----------------- 
+// ----https://github.com/aw2basc/g-grid----
+
+// border-box ftw
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+// g-grid
 .g-grid() {}
 .g-grid(@a) {}
 .g-grid(@a, @b) {}
 .g-grid(@a, @b, @c) {}
 .g-grid(@a, @b, @c, @d, @b) {}
-// lead column
-.g-grid(@a) when (@a = lead), (@a = l) {
-	margin-left:0;
-	clear:left;
-}
-// etc
-.g-grid(@a) when (@a = etc) {
-	float:left;
-	display:inline;
-	min-height:1px;
-}
+
 // cf
 .g-grid(@a) when (@a = clearfix), (@a = cf) {
 	zoom:1;
 	&:before { content:""; display:table; }
 	&:after { content:""; display:table; clear:both; }
 }
-// cont
-.g-grid(@a) when (@a = container), (@a = cont) {
+
+// etc
+.g-grid-etc() {
+	float:left;
+	display:inline;
+	min-height:1px;
+}
+
+// width
+.g-grid-width(@a,@m,@g) {
+	width:(@m * @a + @g * (@a - 1));
+}
+
+// padding
+.g-grid-padding(@p) {
+	padding-left:@p;
+	padding-right:@p;
+}
+
+.g-grid-props(@a, @w, @m, @g){} 
+.g-grid-props(@a, @w, @m, @g, @c){} 
+// <<<<
+.g-grid-props(@a, @w, @m, @g, @c) when not (@c = lead) and ((@m * @a + @g * (@a - 1)) < @w) {
+	margin-left:@g;
+	.g-grid-width(@a,@m,@g);
+	.g-grid-etc();
+}
+// <<<< 1st
+.g-grid-props(@a, @w, @m, @g, @c) when (@c = lead) and ((@m * @a + @g * (@a - 1)) < @w) {
+	clear:left;
+	.g-grid-width(@a,@m,@g);
+	.g-grid-etc();
+}
+// @@@@
+.g-grid-props(@a, @w, @m, @g, @c) when ((@m * @a + @g * (@a - 1)) >= @w) {
+	width:@w;
 	margin:0 auto;
 	clear:left;
 	.g-grid(clearfix);
-}
-
-.g-grid-props(@a, @b, @w, @m, @g){} 
-.g-grid-props(@a, @b, @w, @m, @g, @c){} 
-// <<<<
-.g-grid-props(@a, @b, @w, @m, @g, @c) when not (@c = lead) and ((@m * @a + @g * (@a - 1)) < @w) {
-	width:(@m * @a + @g * (@a - 1)) + @b;
-	margin-left:@g;
-	.g-grid(etc);
-}
-// <<<< 1st
-.g-grid-props(@a, @b, @w, @m, @g, @c) when (@c = lead) and ((@m * @a + @g * (@a - 1)) < @w) {
-	width:(@m * @a + @g * (@a - 1)) + @b;
-	.g-grid(lead);
-	.g-grid(etc);
-}
-// @@@@
-.g-grid-props(@a, @b, @w, @m, @g, @c) when ((@m * @a + @g * (@a - 1)) >= @w) {
-	width:@w;
-	.g-grid(cont);	
-}
-
-// hd
-.g-grid(@a, hd) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, @width-hd, @module-hd, @gutter-hd, false);
-}
-.g-grid(@a, hd, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, @b, @width-hd, @module-hd, @gutter-hd, false);
-}
-.g-grid(@a, hd, lead) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, @width-hd, @module-hd, @gutter-hd, lead);
-}
-.g-grid(@a, hd, lead, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, @b, @width-hd, @module-hd, @gutter-hd, lead);
-}
-// hd fluid
-.g-grid(@a, hd, fluid) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, 100%, @module-hd-fluid, @gutter-hd-fluid, false);
-}
-.g-grid(@a, hd, fluid, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, 100% * (@b / @width-hd), 100%, @module-hd-fluid, @gutter-hd-fluid, false);
-}
-.g-grid(@a, hd, fluid, lead) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, 100%, @module-hd-fluid, @gutter-hd-fluid, lead);
-}
-.g-grid(@a, hd, fluid, lead, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, 100% * (@b / @width-hd), 100%, @module-hd-fluid, @gutter-hd-fluid, lead);
-}
-
-// wide
-.g-grid(@a, wide) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, @width-wide, @module-wide, @gutter-wide, false);
-}
-.g-grid(@a, wide, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, @b, @width-wide, @module-wide, @gutter-wide, false);
-}
-.g-grid(@a, wide, lead) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, @width-wide, @module-wide, @gutter-wide, lead);
-}
-.g-grid(@a, wide, lead, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, @b, @width-wide, @module-wide, @gutter-wide, lead);
-}
-// wide fluid
-.g-grid(@a, wide, fluid) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, 100%, @module-wide-fluid, @gutter-wide-fluid, false);
-}
-.g-grid(@a, wide, fluid, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, 100% * (@b / @width-hd), 100%, @module-wide-fluid, @gutter-wide-fluid, false);
-}
-.g-grid(@a, wide, fluid, lead) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, 100%, @module-wide-fluid, @gutter-wide-fluid, lead);
-}
-.g-grid(@a, wide, fluid, lead, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, 100% * (@b / @width-hd), 100%, @module-wide-fluid, @gutter-wide-fluid, lead);
-}
-
-// desktop
-.g-grid(@a, desktop) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, @width-desktop, @module-desktop, @gutter-desktop, false);
-}
-.g-grid(@a, desktop, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, @b, @width-desktop, @module-desktop, @gutter-desktop, false);
-}
-.g-grid(@a, desktop, lead) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, @width-desktop, @module-desktop, @gutter-desktop, lead);
-}
-.g-grid(@a, desktop, lead, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, @b, @width-desktop, @module-desktop, @gutter-desktop, lead);
-}
-// desktop fluid
-.g-grid(@a, desktop, fluid) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, 100%, @module-desktop-fluid, @gutter-desktop-fluid, false);
-}
-.g-grid(@a, desktop, fluid, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, 100% * (@b / @width-hd), 100%, @module-desktop-fluid, @gutter-desktop-fluid, false);
-}
-.g-grid(@a, desktop, fluid, lead) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, 100%, @module-desktop-fluid, @gutter-desktop-fluid, lead);
-}
-.g-grid(@a, desktop, fluid, lead, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, 100% * (@b / @width-hd), 100%, @module-desktop-fluid, @gutter-desktop-fluid, lead);
-}
-
-// tablet
-.g-grid(@a, tablet) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, @width-tablet, @module-tablet, @gutter-tablet, false);
-}
-.g-grid(@a, tablet, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, @b, @width-tablet, @module-tablet, @gutter-tablet, false);
-}
-.g-grid(@a, tablet, lead) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, @width-tablet, @module-tablet, @gutter-tablet, lead);
-}
-.g-grid(@a, tablet, lead, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, @b, @width-tablet, @module-tablet, @gutter-tablet, lead);
-}
-// tablet fluid
-.g-grid(@a, tablet, fluid) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, 100%, @module-tablet-fluid, @gutter-tablet-fluid, false);
-}
-.g-grid(@a, tablet, fluid, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, 100% * (@b / @width-hd), 100%, @module-tablet-fluid, @gutter-tablet-fluid, false);
-}
-.g-grid(@a, tablet, fluid, lead) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, 100%, @module-tablet-fluid, @gutter-tablet-fluid, lead);
-}
-.g-grid(@a, tablet, fluid, lead, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, 100% * (@b / @width-hd), 100%, @module-tablet-fluid, @gutter-tablet-fluid, lead);
-}
-
-// portrait
-.g-grid(@a, portrait) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, @width-portrait, @module-portrait, @gutter-portrait, false);
-}
-.g-grid(@a, portrait, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, @b, @width-portrait, @module-portrait, @gutter-portrait, false);
-}
-.g-grid(@a, portrait, lead) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, @width-portrait, @module-portrait, @gutter-portrait, lead);
-}
-.g-grid(@a, portrait, lead, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, @b, @width-portrait, @module-portrait, @gutter-portrait, lead);
-}
-// tablet fluid
-.g-grid(@a, portrait, fluid) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, 100%, @module-portrait-fluid, @gutter-portrait-fluid, false);
-}
-.g-grid(@a, portrait, fluid, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, 100% * (@b / @width-hd), 100%, @module-portrait-fluid, @gutter-portrait-fluid, false);
-}
-.g-grid(@a, portrait, fluid, lead) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, 100%, @module-portrait-fluid, @gutter-portrait-fluid, lead);
-}
-.g-grid(@a, portrait, fluid, lead, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, 100% * (@b / @width-hd), 100%, @module-portrait-fluid, @gutter-portrait-fluid, lead);
-}
-
-// mobile
-.g-grid(@a, mobile) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, @width-mobile, @module-mobile, @gutter-mobile, false);
-}
-.g-grid(@a, mobile, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, @b, @width-mobile, @module-mobile, @gutter-mobile, false);
-}
-.g-grid(@a, mobile, lead) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, @width-mobile, @module-mobile, @gutter-mobile, lead);
-}
-.g-grid(@a, mobile, lead, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, @b, @width-mobile, @module-mobile, @gutter-mobile, lead);
-}
-// mobile fluid
-.g-grid(@a, mobile, fluid) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, 100%, @module-mobile-fluid, @gutter-mobile-fluid, false);
-}
-.g-grid(@a, mobile, fluid, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, 100% * (@b / @width-hd), 100%, @module-mobile-fluid, @gutter-mobile-fluid, false);
-}
-.g-grid(@a, mobile, fluid, lead) when (isnumber(@a)) {
-	.g-grid-props(@a, 0, 100%, @module-mobile-fluid, @gutter-mobile-fluid, lead);
-}
-.g-grid(@a, mobile, fluid, lead, @b) when (isnumber(@a)) and (isnumber(@b)) {
-	.g-grid-props(@a, 100% * (@b / @width-hd), 100%, @module-mobile-fluid, @gutter-mobile-fluid, lead);
 }
 
 // g
@@ -306,772 +443,38 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	.g-grid(@a, @b, @c, @d, @e);
 }
 
-// h
-.g-grid(@a, h, @b) when (isnumber(@b)) { .g-grid(@a, hd, @b); }
-.g-grid(all, h, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, @b); }
-.g-grid(a, h, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, @b); }
-.g-grid(@a, hd, l, @b) when (isnumber(@b)) { .g-grid(@a, hd, lead, @b); }
-.g-grid(a, hd, l, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, lead, @b); }
-.g-grid(all, hd, l, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, lead, @b); }
-.g-grid(@a, h, lead, @b) when (isnumber(@b)) { .g-grid(@a, hd, lead, @b); }
-.g-grid(a, h, lead, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, lead, @b); }
-.g-grid(all, h, lead, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, lead, @b); }
-.g-grid(@a, h, l, @b) when (isnumber(@b)) { .g-grid(@a, hd, lead, @b); }
-.g-grid(a, h, l, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, lead, @b); }
-.g-grid(all, h, l, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, lead, @b); }
-.g-grid(@a, hd, f, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, @b); }
-.g-grid(a, hd, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, @b); }
-.g-grid(all, hd, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, @b); }
-.g-grid(@a, h, fluid, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, @b); }
-.g-grid(a, h, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, @b); }
-.g-grid(all, h, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, @b); }
-.g-grid(@a, h, f, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, @b); }
-.g-grid(a, h, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, @b); }
-.g-grid(all, h, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, @b); }
-.g-grid(@a, hd, fluid, f, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, hd, fluid, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, hd, fluid, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, hd, f, lead, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, hd, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, hd, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, hd, f, l, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, hd, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, hd, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, hd, lead, f, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, hd, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, hd, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, hd, l, fluid, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, hd, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, hd, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, hd, l, f, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, hd, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, hd, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, h, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, h, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, h, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, h, fluid, l, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, h, fluid, l, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, h, fluid, l, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, h, f, lead, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, h, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, h, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, h, f, l, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, h, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, h, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, h, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, h, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, h, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, h, lead, f, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, h, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, h, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, h, l, fluid, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, h, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, h, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(@a, h, l, f, @b) when (isnumber(@b)) { .g-grid(@a, hd, fluid, lead, @b); }
-.g-grid(a, h, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-.g-grid(all, h, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-hd, hd, fluid, lead, @b); }
-// w
-.g-grid(@a, w, @b) when (isnumber(@b)) { .g-grid(@a, wide, @b); }
-.g-grid(all, w, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, @b); }
-.g-grid(a, w, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, @b); }
-.g-grid(@a, wide, l, @b) when (isnumber(@b)) { .g-grid(@a, wide, lead, @b); }
-.g-grid(a, wide, l, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, lead, @b); }
-.g-grid(all, wide, l, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, lead, @b); }
-.g-grid(@a, w, lead, @b) when (isnumber(@b)) { .g-grid(@a, wide, lead, @b); }
-.g-grid(a, w, lead, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, lead, @b); }
-.g-grid(all, w, lead, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, lead, @b); }
-.g-grid(@a, w, l, @b) when (isnumber(@b)) { .g-grid(@a, wide, lead, @b); }
-.g-grid(a, w, l, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, lead, @b); }
-.g-grid(all, w, l, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, lead, @b); }
-.g-grid(@a, wide, f, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, @b); }
-.g-grid(a, wide, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, @b); }
-.g-grid(all, wide, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, @b); }
-.g-grid(@a, w, fluid, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, @b); }
-.g-grid(a, w, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, @b); }
-.g-grid(all, w, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, @b); }
-.g-grid(@a, w, f, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, @b); }
-.g-grid(a, w, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, @b); }
-.g-grid(all, w, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, @b); }
-.g-grid(@a, wide, fluid, f, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, wide, fluid, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, wide, fluid, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, wide, f, lead, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, wide, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, wide, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, wide, f, l, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, wide, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, wide, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, wide, lead, f, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, wide, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, wide, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, wide, l, fluid, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, wide, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, wide, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, wide, l, f, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, wide, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, wide, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, w, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, w, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, w, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, w, fluid, l, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, w, fluid, l, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, w, fluid, l, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, w, f, lead, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, w, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, w, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, w, f, l, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, w, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, w, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, w, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, w, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, w, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, w, lead, f, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, w, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, w, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, w, l, fluid, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, w, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, w, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(@a, w, l, f, @b) when (isnumber(@b)) { .g-grid(@a, wide, fluid, lead, @b); }
-.g-grid(a, w, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-.g-grid(all, w, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-wide, wide, fluid, lead, @b); }
-// d
-.g-grid(@a, d, @b) when (isnumber(@b)) { .g-grid(@a, desktop, @b); }
-.g-grid(all, d, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, @b); }
-.g-grid(a, d, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, @b); }
-.g-grid(@a, desktop, l, @b) when (isnumber(@b)) { .g-grid(@a, desktop, lead, @b); }
-.g-grid(a, desktop, l, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, lead, @b); }
-.g-grid(all, desktop, l, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, lead, @b); }
-.g-grid(@a, d, lead, @b) when (isnumber(@b)) { .g-grid(@a, desktop, lead, @b); }
-.g-grid(a, d, lead, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, lead, @b); }
-.g-grid(all, d, lead, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, lead, @b); }
-.g-grid(@a, d, l, @b) when (isnumber(@b)) { .g-grid(@a, desktop, lead, @b); }
-.g-grid(a, d, l, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, lead, @b); }
-.g-grid(all, d, l, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, lead, @b); }
-.g-grid(@a, desktop, f, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, @b); }
-.g-grid(a, desktop, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, @b); }
-.g-grid(all, desktop, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, @b); }
-.g-grid(@a, d, fluid, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, @b); }
-.g-grid(a, d, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, @b); }
-.g-grid(all, d, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, @b); }
-.g-grid(@a, d, f, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, @b); }
-.g-grid(a, d, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, @b); }
-.g-grid(all, d, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, @b); }
-.g-grid(@a, desktop, fluid, f, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, desktop, fluid, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, desktop, fluid, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, desktop, f, lead, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, desktop, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, desktop, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, desktop, f, l, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, desktop, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, desktop, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, desktop, lead, f, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, desktop, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, desktop, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, desktop, l, fluid, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, desktop, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, desktop, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, desktop, l, f, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, desktop, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, desktop, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, d, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, d, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, d, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, d, fluid, l, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, d, fluid, l, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, d, fluid, l, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, d, f, lead, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, d, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, d, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, d, f, l, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, d, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, d, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, d, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, d, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, d, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, d, lead, f, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, d, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, d, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, d, l, fluid, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, d, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, d, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(@a, d, l, f, @b) when (isnumber(@b)) { .g-grid(@a, desktop, fluid, lead, @b); }
-.g-grid(a, d, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-.g-grid(all, d, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-desktop, desktop, fluid, lead, @b); }
-// t
-.g-grid(@a, t, @b) when (isnumber(@b)) { .g-grid(@a, tablet, @b); }
-.g-grid(a, t, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, @b); }
-.g-grid(all, t, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, @b); }
-.g-grid(@a, tablet, l, @b) when (isnumber(@b)) { .g-grid(@a, tablet, lead, @b); }
-.g-grid(a, tablet, l, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, lead, @b); }
-.g-grid(all, tablet, l, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, lead, @b); }
-.g-grid(@a, t, lead, @b) when (isnumber(@b)) { .g-grid(@a, tablet, lead, @b); }
-.g-grid(a, t, lead, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, lead, @b); }
-.g-grid(all, t, lead, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, lead, @b); }
-.g-grid(@a, t, l, @b) when (isnumber(@b)) { .g-grid(@a, tablet, lead, @b); }
-.g-grid(a, t, l, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, lead, @b); }
-.g-grid(all, t, l, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, lead, @b); }
-.g-grid(@a, tablet, f, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, @b); }
-.g-grid(a, tablet, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, @b); }
-.g-grid(all, tablet, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, @b); }
-.g-grid(@a, t, fluid, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, @b); }
-.g-grid(a, t, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, @b); }
-.g-grid(all, t, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, @b); }
-.g-grid(@a, t, f, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, @b); }
-.g-grid(a, t, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, @b); }
-.g-grid(all, t, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, @b); }
-.g-grid(@a, tablet, fluid, f, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, tablet, fluid, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, tablet, fluid, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, tablet, f, lead, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, tablet, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, tablet, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, tablet, f, l, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, tablet, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, tablet, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, tablet, lead, f, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, tablet, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, tablet, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, tablet, l, fluid, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, tablet, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, tablet, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, tablet, l, f, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, tablet, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, tablet, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, t, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, t, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, t, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, t, fluid, l, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, t, fluid, l, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, t, fluid, l, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, t, f, lead, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, t, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, t, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, t, f, l, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, t, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, t, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, t, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, t, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, t, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, t, lead, f, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, t, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, t, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, t, l, fluid, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, t, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, t, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(@a, t, l, f, @b) when (isnumber(@b)) { .g-grid(@a, tablet, fluid, lead, @b); }
-.g-grid(a, t, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-.g-grid(all, t, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-tablet, tablet, fluid, lead, @b); }
-// p
-.g-grid(@a, p, @b) when (isnumber(@b)) { .g-grid(@a, portrait, @b); }
-.g-grid(a, p, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, @b); }
-.g-grid(all, p, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, @b); }
-.g-grid(@a, portrait, l, @b) when (isnumber(@b)) { .g-grid(@a, portrait, lead, @b); }
-.g-grid(a, portrait, l, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, lead, @b); }
-.g-grid(all, portrait, l, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, lead, @b); }
-.g-grid(@a, p, lead, @b) when (isnumber(@b)) { .g-grid(@a, portrait, lead, @b); }
-.g-grid(a, p, lead, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, lead, @b); }
-.g-grid(all, p, lead, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, lead, @b); }
-.g-grid(@a, p, l, @b) when (isnumber(@b)) { .g-grid(@a, portrait, lead, @b); }
-.g-grid(a, p, l, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, lead, @b); }
-.g-grid(all, p, l, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, lead, @b); }
-.g-grid(@a, portrait, f, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, @b); }
-.g-grid(a, portrait, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, @b); }
-.g-grid(all, portrait, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, @b); }
-.g-grid(@a, p, fluid, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, @b); }
-.g-grid(a, p, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, @b); }
-.g-grid(all, p, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, @b); }
-.g-grid(@a, p, f, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, @b); }
-.g-grid(a, p, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, @b); }
-.g-grid(all, p, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, @b); }
-.g-grid(@a, portrait, fluid, f, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, portrait, fluid, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, portrait, fluid, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, portrait, f, lead, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, portrait, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, portrait, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, portrait, f, l, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, portrait, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, portrait, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, portrait, lead, f, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, portrait, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, portrait, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, portrait, l, fluid, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, portrait, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, portrait, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, portrait, l, f, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, portrait, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, portrait, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, p, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, p, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, p, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, p, fluid, l, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, p, fluid, l, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, p, fluid, l, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, p, f, lead, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, p, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, p, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, p, f, l, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, p, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, p, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, p, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, p, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, p, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, p, lead, f, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, p, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, p, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, p, l, fluid, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, p, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, p, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(@a, p, l, f, @b) when (isnumber(@b)) { .g-grid(@a, portrait, fluid, lead, @b); }
-.g-grid(a, p, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-.g-grid(all, p, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-portrait, portrait, fluid, lead, @b); }
-// m
-.g-grid(@a, m, @b) when (isnumber(@b)) { .g-grid(@a, mobile, @b); }
-.g-grid(a, m, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, @b); }
-.g-grid(all, m, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, @b); }
-.g-grid(@a, mobile, l, @b) when (isnumber(@b)) { .g-grid(@a, mobile, lead, @b); }
-.g-grid(a, mobile, l, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, lead, @b); }
-.g-grid(all, mobile, l, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, lead, @b); }
-.g-grid(@a, m, lead, @b) when (isnumber(@b)) { .g-grid(@a, mobile, lead, @b); }
-.g-grid(a, m, lead, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, lead, @b); }
-.g-grid(all, m, lead, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, lead, @b); }
-.g-grid(@a, m, l, @b) when (isnumber(@b)) { .g-grid(@a, mobile, lead, @b); }
-.g-grid(a, m, l, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, lead, @b); }
-.g-grid(all, m, l, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, lead, @b); }
-.g-grid(@a, mobile, f, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, @b); }
-.g-grid(a, mobile, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, @b); }
-.g-grid(all, mobile, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, @b); }
-.g-grid(@a, m, fluid, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, @b); }
-.g-grid(a, m, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, @b); }
-.g-grid(all, m, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, @b); }
-.g-grid(@a, m, f, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, @b); }
-.g-grid(a, m, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, @b); }
-.g-grid(all, m, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, @b); }
-.g-grid(@a, mobile, fluid, f, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, mobile, fluid, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, mobile, fluid, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, mobile, f, lead, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, mobile, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, mobile, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, mobile, f, l, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, mobile, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, mobile, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, mobile, lead, f, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, mobile, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, mobile, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, mobile, l, fluid, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, mobile, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, mobile, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, mobile, l, f, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, mobile, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, mobile, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, m, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, m, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, m, fluid, lead, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, m, fluid, l, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, m, fluid, l, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, m, fluid, l, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, m, f, lead, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, m, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, m, f, lead, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, m, f, l, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, m, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, m, f, l, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, m, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, m, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, m, lead, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, m, lead, f, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, m, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, m, lead, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, m, l, fluid, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, m, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, m, l, fluid, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(@a, m, l, f, @b) when (isnumber(@b)) { .g-grid(@a, mobile, fluid, lead, @b); }
-.g-grid(a, m, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
-.g-grid(all, m, l, f, @b) when (isnumber(@b)) { .g-grid(@columns-mobile, mobile, fluid, lead, @b); }
+// all
+.g-grid(a) {}
+.g-grid(a,@a){ .g-grid(all,@a); }
+.g-grid(a,@a,@b){ .g-grid(all,@a,@b); }
+.g-grid(a,@a,@b,@c){ .g-grid(all,@a,@b,@c); }
+.g-grid(a,@a,@b,@c,@d){ .g-grid(all,@a,@b,@c,@d); }
 
-// h
-.g-grid(@a, h) { .g-grid(@a, hd); }
-.g-grid(all, h){ .g-grid(@columns-hd, hd); }
-.g-grid(a, h){ .g-grid(@columns-hd, hd); }
-.g-grid(@a, hd, l) { .g-grid(@a, hd, lead); }
-.g-grid(a, hd, l) { .g-grid(@columns-hd, hd, lead); }
-.g-grid(all, hd, l) { .g-grid(@columns-hd, hd, lead); }
-.g-grid(@a, h, lead) { .g-grid(@a, hd, lead); }
-.g-grid(a, h, lead) { .g-grid(@columns-hd, hd, lead); }
-.g-grid(all, h, lead) { .g-grid(@columns-hd, hd, lead); }
-.g-grid(@a, h, l) { .g-grid(@a, hd, lead); }
-.g-grid(a, h, l) { .g-grid(@columns-hd, hd, lead); }
-.g-grid(all, h, l) { .g-grid(@columns-hd, hd, lead); }
-.g-grid(@a, hd, f) { .g-grid(@a, hd, fluid); }
-.g-grid(a, hd, f) { .g-grid(@columns-hd, hd, fluid); }
-.g-grid(all, hd, f) { .g-grid(@columns-hd, hd, fluid); }
-.g-grid(@a, h, fluid) { .g-grid(@a, hd, fluid); }
-.g-grid(a, h, fluid) { .g-grid(@columns-hd, hd, fluid); }
-.g-grid(all, h, fluid) { .g-grid(@columns-hd, hd, fluid); }
-.g-grid(@a, h, f) { .g-grid(@a, hd, fluid); }
-.g-grid(a, h, f) { .g-grid(@columns-hd, hd, fluid); }
-.g-grid(all, h, f) { .g-grid(@columns-hd, hd, fluid); }
-.g-grid(@a, hd, fluid, f) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, hd, fluid, f) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, hd, fluid, f) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, hd, f, lead) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, hd, f, lead) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, hd, f, lead) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, hd, f, l) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, hd, f, l) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, hd, f, l) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, hd, lead, f) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, hd, lead, f) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, hd, lead, f) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, hd, l, fluid) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, hd, l, fluid) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, hd, l, fluid) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, hd, l, f) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, hd, l, f) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, hd, l, f) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, h, fluid, lead) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, h, fluid, lead) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, h, fluid, lead) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, h, fluid, l) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, h, fluid, l) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, h, fluid, l) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, h, f, lead) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, h, f, lead) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, h, f, lead) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, h, f, l) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, h, f, l) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, h, f, l) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, h, lead, fluid) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, h, lead, fluid) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, h, lead, fluid) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, h, lead, f) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, h, lead, f) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, h, lead, f) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, h, l, fluid) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, h, l, fluid) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, h, l, fluid) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(@a, h, l, f) { .g-grid(@a, hd, fluid, lead); }
-.g-grid(a, h, l, f) { .g-grid(@columns-hd, hd, fluid, lead); }
-.g-grid(all, h, l, f) { .g-grid(@columns-hd, hd, fluid, lead); }
-// w
-.g-grid(@a, w) { .g-grid(@a, wide); }
-.g-grid(all, w) { .g-grid(@columns-wide, wide); }
-.g-grid(a, w) { .g-grid(@columns-wide, wide); }
-.g-grid(@a, wide, l) { .g-grid(@a, wide, lead); }
-.g-grid(a, wide, l) { .g-grid(@columns-wide, wide, lead); }
-.g-grid(all, wide, l) { .g-grid(@columns-wide, wide, lead); }
-.g-grid(@a, w, lead) { .g-grid(@a, wide, lead); }
-.g-grid(a, w, lead) { .g-grid(@columns-wide, wide, lead); }
-.g-grid(all, w, lead) { .g-grid(@columns-wide, wide, lead); }
-.g-grid(@a, w, l) { .g-grid(@a, wide, lead); }
-.g-grid(a, w, l) { .g-grid(@columns-wide, wide, lead); }
-.g-grid(all, w, l) { .g-grid(@columns-wide, wide, lead); }
-.g-grid(@a, wide, f) { .g-grid(@a, wide, fluid); }
-.g-grid(a, wide, f) { .g-grid(@columns-wide, wide, fluid); }
-.g-grid(all, wide, f) { .g-grid(@columns-wide, wide, fluid); }
-.g-grid(@a, w, fluid) { .g-grid(@a, wide, fluid); }
-.g-grid(a, w, fluid) { .g-grid(@columns-wide, wide, fluid); }
-.g-grid(all, w, fluid) { .g-grid(@columns-wide, wide, fluid); }
-.g-grid(@a, w, f) { .g-grid(@a, wide, fluid); }
-.g-grid(a, w, f) { .g-grid(@columns-wide, wide, fluid); }
-.g-grid(all, w, f) { .g-grid(@columns-wide, wide, fluid); }
-.g-grid(@a, wide, fluid, f) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, wide, fluid, f) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, wide, fluid, f) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, wide, f, lead) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, wide, f, lead) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, wide, f, lead) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, wide, f, l) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, wide, f, l) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, wide, f, l) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, wide, lead, f) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, wide, lead, f) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, wide, lead, f) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, wide, l, fluid) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, wide, l, fluid) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, wide, l, fluid) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, wide, l, f) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, wide, l, f) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, wide, l, f) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, w, fluid, lead) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, w, fluid, lead) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, w, fluid, lead) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, w, fluid, l) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, w, fluid, l) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, w, fluid, l) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, w, f, lead) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, w, f, lead) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, w, f, lead) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, w, f, l) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, w, f, l) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, w, f, l) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, w, lead, fluid) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, w, lead, fluid) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, w, lead, fluid) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, w, lead, f) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, w, lead, f) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, w, lead, f) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, w, l, fluid) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, w, l, fluid) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, w, l, fluid) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(@a, w, l, f) { .g-grid(@a, wide, fluid, lead); }
-.g-grid(a, w, l, f) { .g-grid(@columns-wide, wide, fluid, lead); }
-.g-grid(all, w, l, f) { .g-grid(@columns-wide, wide, fluid, lead); }
-// d
-.g-grid(@a, d) { .g-grid(@a, desktop); }
-.g-grid(all, d) { .g-grid(@columns-desktop, desktop); }
-.g-grid(a, d) { .g-grid(@columns-desktop, desktop); }
-.g-grid(@a, desktop, l) { .g-grid(@a, desktop, lead); }
-.g-grid(a, desktop, l) { .g-grid(@columns-desktop, desktop, lead); }
-.g-grid(all, desktop, l) { .g-grid(@columns-desktop, desktop, lead); }
-.g-grid(@a, d, lead) { .g-grid(@a, desktop, lead); }
-.g-grid(a, d, lead) { .g-grid(@columns-desktop, desktop, lead); }
-.g-grid(all, d, lead) { .g-grid(@columns-desktop, desktop, lead); }
-.g-grid(@a, d, l) { .g-grid(@a, desktop, lead); }
-.g-grid(a, d, l) { .g-grid(@columns-desktop, desktop, lead); }
-.g-grid(all, d, l) { .g-grid(@columns-desktop, desktop, lead); }
-.g-grid(@a, desktop, f) { .g-grid(@a, desktop, fluid); }
-.g-grid(a, desktop, f) { .g-grid(@columns-desktop, desktop, fluid); }
-.g-grid(all, desktop, f) { .g-grid(@columns-desktop, desktop, fluid); }
-.g-grid(@a, d, fluid) { .g-grid(@a, desktop, fluid); }
-.g-grid(a, d, fluid) { .g-grid(@columns-desktop, desktop, fluid); }
-.g-grid(all, d, fluid) { .g-grid(@columns-desktop, desktop, fluid); }
-.g-grid(@a, d, f) { .g-grid(@a, desktop, fluid); }
-.g-grid(a, d, f) { .g-grid(@columns-desktop, desktop, fluid); }
-.g-grid(all, d, f) { .g-grid(@columns-desktop, desktop, fluid); }
-.g-grid(@a, desktop, fluid, f) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, desktop, fluid, f) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, desktop, fluid, f) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, desktop, f, lead) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, desktop, f, lead) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, desktop, f, lead) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, desktop, f, l) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, desktop, f, l) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, desktop, f, l) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, desktop, lead, f) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, desktop, lead, f) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, desktop, lead, f) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, desktop, l, fluid) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, desktop, l, fluid) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, desktop, l, fluid) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, desktop, l, f) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, desktop, l, f) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, desktop, l, f) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, d, fluid, lead) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, d, fluid, lead) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, d, fluid, lead) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, d, fluid, l) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, d, fluid, l) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, d, fluid, l) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, d, f, lead) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, d, f, lead) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, d, f, lead) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, d, f, l) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, d, f, l) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, d, f, l) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, d, lead, fluid) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, d, lead, fluid) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, d, lead, fluid) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, d, lead, f) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, d, lead, f) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, d, lead, f) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, d, l, fluid) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, d, l, fluid) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, d, l, fluid) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(@a, d, l, f) { .g-grid(@a, desktop, fluid, lead); }
-.g-grid(a, d, l, f) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-.g-grid(all, d, l, f) { .g-grid(@columns-desktop, desktop, fluid, lead); }
-// t
-.g-grid(@a, t) { .g-grid(@a, tablet); }
-.g-grid(a, t) { .g-grid(@columns-tablet, tablet); }
-.g-grid(all, t) { .g-grid(@columns-tablet, tablet); }
-.g-grid(@a, tablet, l) { .g-grid(@a, tablet, lead); }
-.g-grid(a, tablet, l) { .g-grid(@columns-tablet, tablet, lead); }
-.g-grid(all, tablet, l) { .g-grid(@columns-tablet, tablet, lead); }
-.g-grid(@a, t, lead) { .g-grid(@a, tablet, lead); }
-.g-grid(a, t, lead) { .g-grid(@columns-tablet, tablet, lead); }
-.g-grid(all, t, lead) { .g-grid(@columns-tablet, tablet, lead); }
-.g-grid(@a, t, l) { .g-grid(@a, tablet, lead); }
-.g-grid(a, t, l) { .g-grid(@columns-tablet, tablet, lead); }
-.g-grid(all, t, l) { .g-grid(@columns-tablet, tablet, lead); }
-.g-grid(@a, tablet, f) { .g-grid(@a, tablet, fluid); }
-.g-grid(a, tablet, f) { .g-grid(@columns-tablet, tablet, fluid); }
-.g-grid(all, tablet, f) { .g-grid(@columns-tablet, tablet, fluid); }
-.g-grid(@a, t, fluid) { .g-grid(@a, tablet, fluid); }
-.g-grid(a, t, fluid) { .g-grid(@columns-tablet, tablet, fluid); }
-.g-grid(all, t, fluid) { .g-grid(@columns-tablet, tablet, fluid); }
-.g-grid(@a, t, f) { .g-grid(@a, tablet, fluid); }
-.g-grid(a, t, f) { .g-grid(@columns-tablet, tablet, fluid); }
-.g-grid(all, t, f) { .g-grid(@columns-tablet, tablet, fluid); }
-.g-grid(@a, tablet, fluid, f) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, tablet, fluid, f) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, tablet, fluid, f) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, tablet, f, lead) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, tablet, f, lead) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, tablet, f, lead) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, tablet, f, l) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, tablet, f, l) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, tablet, f, l) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, tablet, lead, f) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, tablet, lead, f) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, tablet, lead, f) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, tablet, l, fluid) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, tablet, l, fluid) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, tablet, l, fluid) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, tablet, l, f) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, tablet, l, f) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, tablet, l, f) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, t, fluid, lead) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, t, fluid, lead) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, t, fluid, lead) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, t, fluid, l) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, t, fluid, l) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, t, fluid, l) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, t, f, lead) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, t, f, lead) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, t, f, lead) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, t, f, l) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, t, f, l) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, t, f, l) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, t, lead, fluid) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, t, lead, fluid) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, t, lead, fluid) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, t, lead, f) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, t, lead, f) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, t, lead, f) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, t, l, fluid) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, t, l, fluid) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, t, l, fluid) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(@a, t, l, f) { .g-grid(@a, tablet, fluid, lead); }
-.g-grid(a, t, l, f) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-.g-grid(all, t, l, f) { .g-grid(@columns-tablet, tablet, fluid, lead); }
-// p
-.g-grid(@a, p) { .g-grid(@a, portrait); }
-.g-grid(a, p) { .g-grid(@columns-portrait, portrait); }
-.g-grid(all, p) { .g-grid(@columns-portrait, portrait); }
-.g-grid(@a, portrait, l) { .g-grid(@a, portrait, lead); }
-.g-grid(a, portrait, l) { .g-grid(@columns-portrait, portrait, lead); }
-.g-grid(all, portrait, l) { .g-grid(@columns-portrait, portrait, lead); }
-.g-grid(@a, p, lead) { .g-grid(@a, portrait, lead); }
-.g-grid(a, p, lead) { .g-grid(@columns-portrait, portrait, lead); }
-.g-grid(all, p, lead) { .g-grid(@columns-portrait, portrait, lead); }
-.g-grid(@a, p, l) { .g-grid(@a, portrait, lead); }
-.g-grid(a, p, l) { .g-grid(@columns-portrait, portrait, lead); }
-.g-grid(all, p, l) { .g-grid(@columns-portrait, portrait, lead); }
-.g-grid(@a, portrait, f) { .g-grid(@a, portrait, fluid); }
-.g-grid(a, portrait, f) { .g-grid(@columns-portrait, portrait, fluid); }
-.g-grid(all, portrait, f) { .g-grid(@columns-portrait, portrait, fluid); }
-.g-grid(@a, p, fluid) { .g-grid(@a, portrait, fluid); }
-.g-grid(a, p, fluid) { .g-grid(@columns-portrait, portrait, fluid); }
-.g-grid(all, p, fluid) { .g-grid(@columns-portrait, portrait, fluid); }
-.g-grid(@a, p, f) { .g-grid(@a, portrait, fluid); }
-.g-grid(a, p, f) { .g-grid(@columns-portrait, portrait, fluid); }
-.g-grid(all, p, f) { .g-grid(@columns-portrait, portrait, fluid); }
-.g-grid(@a, portrait, fluid, f) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, portrait, fluid, f) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, portrait, fluid, f) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, portrait, f, lead) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, portrait, f, lead) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, portrait, f, lead) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, portrait, f, l) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, portrait, f, l) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, portrait, f, l) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, portrait, lead, f) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, portrait, lead, f) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, portrait, lead, f) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, portrait, l, fluid) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, portrait, l, fluid) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, portrait, l, fluid) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, portrait, l, f) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, portrait, l, f) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, portrait, l, f) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, p, fluid, lead) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, p, fluid, lead) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, p, fluid, lead) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, p, fluid, l) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, p, fluid, l) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, p, fluid, l) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, p, f, lead) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, p, f, lead) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, p, f, lead) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, p, f, l) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, p, f, l) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, p, f, l) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, p, lead, fluid) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, p, lead, fluid) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, p, lead, fluid) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, p, lead, f) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, p, lead, f) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, p, lead, f) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, p, l, fluid) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, p, l, fluid) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, p, l, fluid) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(@a, p, l, f) { .g-grid(@a, portrait, fluid, lead); }
-.g-grid(a, p, l, f) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-.g-grid(all, p, l, f) { .g-grid(@columns-portrait, portrait, fluid, lead); }
-// m
-.g-grid(@a, m) { .g-grid(@a, mobile); }
-.g-grid(a, m) { .g-grid(@columns-mobile, mobile); }
-.g-grid(all, m) { .g-grid(@columns-mobile, mobile); }
-.g-grid(@a, mobile, l) { .g-grid(@a, mobile, lead); }
-.g-grid(a, mobile, l) { .g-grid(@columns-mobile, mobile, lead); }
-.g-grid(all, mobile, l) { .g-grid(@columns-mobile, mobile, lead); }
-.g-grid(@a, m, lead) { .g-grid(@a, mobile, lead); }
-.g-grid(a, m, lead) { .g-grid(@columns-mobile, mobile, lead); }
-.g-grid(all, m, lead) { .g-grid(@columns-mobile, mobile, lead); }
-.g-grid(@a, m, l) { .g-grid(@a, mobile, lead); }
-.g-grid(a, m, l) { .g-grid(@columns-mobile, mobile, lead); }
-.g-grid(all, m, l) { .g-grid(@columns-mobile, mobile, lead); }
-.g-grid(@a, mobile, f) { .g-grid(@a, mobile, fluid); }
-.g-grid(a, mobile, f) { .g-grid(@columns-mobile, mobile, fluid); }
-.g-grid(all, mobile, f) { .g-grid(@columns-mobile, mobile, fluid); }
-.g-grid(@a, m, fluid) { .g-grid(@a, mobile, fluid); }
-.g-grid(a, m, fluid) { .g-grid(@columns-mobile, mobile, fluid); }
-.g-grid(all, m, fluid) { .g-grid(@columns-mobile, mobile, fluid); }
-.g-grid(@a, m, f) { .g-grid(@a, mobile, fluid); }
-.g-grid(a, m, f) { .g-grid(@columns-mobile, mobile, fluid); }
-.g-grid(all, m, f) { .g-grid(@columns-mobile, mobile, fluid); }
-.g-grid(@a, mobile, fluid, f) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, mobile, fluid, f) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, mobile, fluid, f) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, mobile, f, lead) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, mobile, f, lead) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, mobile, f, lead) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, mobile, f, l) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, mobile, f, l) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, mobile, f, l) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, mobile, lead, f) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, mobile, lead, f) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, mobile, lead, f) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, mobile, l, fluid) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, mobile, l, fluid) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, mobile, l, fluid) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, mobile, l, f) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, mobile, l, f) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, mobile, l, f) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, m, fluid, lead) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, m, fluid, lead) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, m, fluid, lead) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, m, fluid, l) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, m, fluid, l) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, m, fluid, l) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, m, f, lead) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, m, f, lead) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, m, f, lead) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, m, f, l) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, m, f, l) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, m, f, l) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, m, lead, fluid) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, m, lead, fluid) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, m, lead, fluid) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, m, lead, f) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, m, lead, f) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, m, lead, f) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, m, l, fluid) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, m, l, fluid) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, m, l, fluid) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(@a, m, l, f) { .g-grid(@a, mobile, fluid, lead); }
-.g-grid(a, m, l, f) { .g-grid(@columns-mobile, mobile, fluid, lead); }
-.g-grid(all, m, l, f) { .g-grid(@columns-mobile, mobile, fluid, lead); }
+// padding
+.g-grid(p) {}
+.g-grid(p,@a){ .g-grid(padding,@a); }
+.g-grid(p,@a,@b){ .g-grid(padding,@a,fluid); }
+.g-grid(p,@a,@b,@c){ .g-grid(padding,@a,@b,@c); }
+.g-grid(p,@a,@b,@c,@d){ .g-grid(padding,@a,@b,@c,@d); }
+
+// lead
+.g-grid(@a,@b,l){.g-grid(@a,@b,lead)}
+.g-grid(@a,@b,@c,l) {.g-grid(@a,@b,@c,lead)}
+.g-grid(@a,@b,l,@c) {}
+.g-grid(@a,@b,left){.g-grid(@a,@b,lead)}
+.g-grid(@a,@b,@c,left) {.g-grid(@a,@b,@c,lead)}
+.g-grid(@a,@b,left,@c) {}
+
+// fluid
+.g-grid(@a,@b,f) when not (@a = p) {.g-grid(@a,@b,fluid)}
+.g-grid(@a,@b,f,@c) when not (@c = l) and not (@c = left) and not (@c = o) {.g-grid(@a,@b,fluid,@c)}
+.g-grid(@a,@b,@c,f) {}
+.g-grid(@a,@b,flex){.g-grid(@a,@b,fluid)}
+.g-grid(@a,@b,flex,@c) when not (@c = l) and not (@c = left) and not (@c = o) {.g-grid(@a,@b,fluid,@c)}
+.g-grid(@a,@b,@c,flex) {}
+
+// only
+.g-grid(@a,@b,o){.g-grid(@a,@b,only)}
+.g-grid(@a,@b,@c,o){.g-grid(@a,@b,fluid,only)}
+.g-grid(@a,@b,o,@c){}
+.g-grid(@a,@b,@c,o){}
