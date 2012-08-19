@@ -3,7 +3,7 @@ g-grid is a css grid system with fluid and static widths meant to be used semant
 **requires [less](http://lesscss.org/ "less")**
 
 ## features
-[semantic](https://github.com/aw2basc/g-grid#semantic)  
+[semantic](#semantic)  
 [6 grid systems](#grids)  
 [static and fluid widths](#fluid)  
 [lead column adjustments](#lead)  
@@ -64,25 +64,25 @@ e.g `.container { .g-grid(3,978,lead); }`
 `padding:10px;`  
 `columns:8;`  
 
-## <a id="fluid"></a> static/fluid  
+## <a name="fluid"></a> static/fluid  
 if you do not specify, width is returned in px.  
 adding in fluid var returns width in %.
 
-## <a id="lead"></a> lead  
+## <a name="lead"></a> lead  
 no margin set  
 clear:left;
 
-## <a id="only"></a> only
+## <a name="only"></a> only
 returns width:x; only
 
-## <a id="padding"></a> padding
+## <a name="padding"></a> padding
 padding-left:x;  
 padding-right:x;
 
 ## clearfix
 adds clearfix to the current container
 
-## <a id="shorthand"></a> shorthand
+## <a name="shorthand"></a> shorthand
 `.g() == .g-grid()` -> (e.g. .g(9,978); == .g-grid(9,978);)  
 `all/a == (max columns)` -> (e.g. `.g(a,978); == .g(12,978);`)  
 `1848 == WUXGA == hd == h` -> (e.g. `.g(2,h); == .g(2,1848);`)  
