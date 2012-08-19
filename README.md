@@ -3,7 +3,7 @@ g-grid is a css grid system with fluid and static widths meant to be used semant
 **requires [less](http://lesscss.org/ "less")**
 
 ## features
-[semantic](#semantic)  
+[semantic](https://github.com/aw2basc/g-grid#semantic)  
 [6 grid systems](#grids)  
 [static and fluid widths](#fluid)  
 [lead column adjustments](#lead)  
