@@ -1,87 +1,88 @@
 /* ------------------g-grid----------------- 
-https://github.com/aw2basc/g-grid
+-------https://github.com/aw2basc/g-grid----
 
 Copyright (C) 2012 Justin S Maxwell
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
+ 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
 /* g-grid desktop */
 .g-grid-1 {
-  width: 54px;
   margin-left: 30px;
+  width: 54px;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-2 {
-  width: 138px;
   margin-left: 30px;
+  width: 138px;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-3 {
-  width: 222px;
   margin-left: 30px;
+  width: 222px;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-4 {
-  width: 306px;
   margin-left: 30px;
+  width: 306px;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-5 {
-  width: 390px;
   margin-left: 30px;
+  width: 390px;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-6 {
-  width: 474px;
   margin-left: 30px;
+  width: 474px;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-7 {
-  width: 558px;
   margin-left: 30px;
+  width: 558px;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-8 {
-  width: 642px;
   margin-left: 30px;
+  width: 642px;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-9 {
-  width: 726px;
   margin-left: 30px;
+  width: 726px;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-10 {
-  width: 810px;
   margin-left: 30px;
+  width: 810px;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-11 {
-  width: 894px;
   margin-left: 30px;
+  width: 894px;
   float: left;
   display: inline;
   min-height: 1px;
@@ -89,7 +90,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 .g-grid-12 {
   width: 978px;
   margin: 0 auto;
-  clear: left;
   zoom: 1;
 }
 .g-grid-12:before {
@@ -104,7 +104,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 .g-grid-all {
   width: 978px;
   margin: 0 auto;
-  clear: left;
   zoom: 1;
 }
 .g-grid-all:before {
@@ -118,167 +117,156 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 /* g-grid desktop first*/
 .g-grid-1-first {
+  clear: both;
   width: 54px;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-2-first {
+  clear: both;
   width: 138px;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-3-first {
+  clear: both;
   width: 222px;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-4-first {
+  clear: both;
   width: 306px;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-5-first {
+  clear: both;
   width: 390px;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-6-first {
+  clear: both;
   width: 474px;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-7-first {
+  clear: both;
   width: 558px;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-8-first {
+  clear: both;
   width: 642px;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-9-first {
+  clear: both;
   width: 726px;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-10-first {
+  clear: both;
   width: 810px;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-11-first {
+  clear: both;
   width: 894px;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 /* g-grid desktop fluid */
 .g-grid-1-fluid {
-  width: 5.521472392638037%;
   margin-left: 3.067484662576687%;
+  width: 5.521472392638037%;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-2-fluid {
-  width: 14.110429447852761%;
   margin-left: 3.067484662576687%;
+  width: 14.110429447852761%;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-3-fluid {
-  width: 22.699386503067483%;
   margin-left: 3.067484662576687%;
+  width: 22.699386503067483%;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-4-fluid {
-  width: 31.288343558282207%;
   margin-left: 3.067484662576687%;
+  width: 31.288343558282207%;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-5-fluid {
-  width: 39.877300613496935%;
   margin-left: 3.067484662576687%;
+  width: 39.877300613496935%;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-6-fluid {
-  width: 48.466257668711655%;
   margin-left: 3.067484662576687%;
+  width: 48.466257668711656%;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-7-fluid {
-  width: 57.05521472392638%;
   margin-left: 3.067484662576687%;
+  width: 57.05521472392638%;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-8-fluid {
-  width: 65.6441717791411%;
   margin-left: 3.067484662576687%;
+  width: 65.6441717791411%;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-9-fluid {
-  width: 74.23312883435582%;
   margin-left: 3.067484662576687%;
+  width: 74.23312883435582%;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-10-fluid {
-  width: 82.82208588957056%;
   margin-left: 3.067484662576687%;
+  width: 82.82208588957056%;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-11-fluid {
-  width: 91.41104294478528%;
   margin-left: 3.067484662576687%;
+  width: 91.41104294478528%;
   float: left;
   display: inline;
   min-height: 1px;
@@ -286,7 +274,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 .g-grid-12-fluid {
   width: 100%;
   margin: 0 auto;
-  clear: left;
   zoom: 1;
 }
 .g-grid-12-fluid:before {
@@ -301,7 +288,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 .g-grid-all-fluid {
   width: 100%;
   margin: 0 auto;
-  clear: left;
   zoom: 1;
 }
 .g-grid-all-fluid:before {
@@ -315,89 +301,78 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 /* g-grid desktop fluid first*/
 .g-grid-1-fluid-first {
+  clear: both;
   width: 5.521472392638037%;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-2-fluid-first {
+  clear: both;
   width: 14.110429447852761%;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-3-fluid-first {
+  clear: both;
   width: 22.699386503067483%;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-4-fluid-first {
+  clear: both;
   width: 31.288343558282207%;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-5-fluid-first {
+  clear: both;
   width: 39.877300613496935%;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-6-fluid-first {
-  width: 48.466257668711655%;
-  margin-left: 0;
-  clear: left;
+  clear: both;
+  width: 48.466257668711656%;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-7-fluid-first {
+  clear: both;
   width: 57.05521472392638%;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-8-fluid-first {
+  clear: both;
   width: 65.6441717791411%;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-9-fluid-first {
+  clear: both;
   width: 74.23312883435582%;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-10-fluid-first {
+  clear: both;
   width: 82.82208588957056%;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;
 }
 .g-grid-11-fluid-first {
+  clear: both;
   width: 91.41104294478528%;
-  margin-left: 0;
-  clear: left;
   float: left;
   display: inline;
   min-height: 1px;

@@ -9,16 +9,18 @@ g-grid is a css grid system with fluid and static widths meant to be used semant
 [lead column adjustments](#lead)  
 [widths only](#only)  
 [padding only](#padding)  
+[float left/right](#right)  
 [shorthand](#shorthand)  
 
 ## usage
-`.g-grid(num-columns, grid-system [, fluid] [, lead]);`  
+`.g-grid(num-columns, grid-system [, fluid] [, lead] [, right]);`  
 `.g-grid(padding, grid-system [, fluid]);`  
 `.g-grid(num-columns, grid-system, only);`  
 `.g-grid(clearfix);`  
 
 ## <a name="semantic"></a> semantic
-g-grid is a mixin meant to be used within your stylesheet.  
+g-grid is a system of mixins meant to be used semantically within your stylesheet.  
+Inspiration for this is from the semantic grid system from smashing magazine.  
 e.g `.container { .g-grid(3,978,lead); }`
 
 ## <a name="grids"></a> grids
@@ -50,7 +52,7 @@ e.g `.container { .g-grid(3,978,lead); }`
 `padding:10px;`  
 `columns:12;`  
 
-460 - Portrait - HVGA  
+460 - Landscape - HVGA  
 `width:460px;`   
 `module:27px;`   
 `gutter:12px;`   
@@ -66,18 +68,20 @@ e.g `.container { .g-grid(3,978,lead); }`
 
 ## <a name="fluid"></a> static/fluid  
 if you do not specify, width is returned in px.  
-adding in fluid var returns width in %.
+adding fluid returns width in %.
 
 ## <a name="lead"></a> lead  
-no margin set  
-clear:left;
+lead is the first column to the left  
+adds `clear:left;`
 
 ## <a name="only"></a> only
-returns width:x; only
+returns `width:x;` only
 
 ## <a name="padding"></a> padding
-padding-left:x;  
-padding-right:x;
+returns `padding-left:x; padding-right:x;`  
+
+## <a name="right"></a> float left/right  
+option to change to `float:right;`  
 
 ## clearfix
 adds clearfix to the current container
@@ -106,3 +110,8 @@ adds clearfix to the current container
 `.g(p,XGA);` -> padding l&r in 978 grid  
 `.g(4,QVGA,f,o);` -> 4 col % wid only in 300 grid
  
+## notes
+
+it is recommended to use this with box-sizing:border-box.  
+here's the paul irish snippet:  
+`* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }`
