@@ -1,9 +1,12 @@
 <pre>
+                                          //
     =====       =====   //===   //    ===//
    //  //  ==  //  //  //  //  //   //  //
    ===//       ===//  //      //    ===//
      //          //    
- ===//       ===//  
+ ===//       ===//  fluid semantic grid
+
+-----https://github.com/aw2basc/g-grid-----
 </pre>
 
 # g-grid
@@ -23,7 +26,7 @@ g-grid is a css grid system with fluid and static widths meant to be used semant
 ## usage
 `.g-grid(num-columns, grid-system [, fluid] [, lead] [, right]);`  
 `.g-grid(padding, grid-system [, fluid]);`  
-`.g-grid(num-columns, grid-system, only);`  
+`.g-grid(num-columns, grid-system [, fluid], only);`  
 `.g-grid(clearfix);`  
 
 ## <a name="semantic"></a> semantic
