@@ -1,3 +1,11 @@
+<pre>
+    =====       =====   //===   //    ===//
+   //  //  ==  //  //  //  //  //   //  //
+   ===//       ===//  //      //    ===//
+     //          //    
+ ===//       ===//  
+</pre>
+
 # g-grid
 g-grid is a css grid system with fluid and static widths meant to be used semantically as mixins within your stylesheet.  
 **requires [less](http://lesscss.org/ "less")**
