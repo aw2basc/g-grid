@@ -1,0 +1,75 @@
+// ------------------g-grid----------------- 
+// ----https://github.com/aw2basc/g-grid----
+
+// g-grid
+.g-grid() {}
+.g-grid(@a) {}
+.g-grid(@a, @b) {}
+.g-grid(@a, @b, @c) {}
+.g-grid(@a, @b, @c, @d, @b) {}
+
+// cf
+.g-grid(@a) when (@a = clearfix), (@a = cf) {
+	zoom:1;
+	&:before { content:""; display:table; }
+	&:after { content:""; display:table; clear:both; }
+}
+
+// etc
+.g-grid-etc(@dir) {
+	float:@dir;
+	display:inline;
+	min-height:1px;
+}
+
+// width
+.g-grid-width(@a,@m,@g) {
+	width:(@m * @a + @g * (@a - 1));
+}
+
+// padding
+.g-grid-padding(@p) {
+	padding-left:@p;
+	padding-right:@p;
+}
+
+.g-grid-props(@a, @w, @m, @g){} 
+.g-grid-props(@a, @w, @m, @g, @c){} 
+// <<<<
+.g-grid-props(@a, @w, @m, @g, @c, @dir:left) when not (@c = lead) and ((@m * @a + @g * (@a - 1)) < @w) {
+	margin-left:@g;
+	.g-grid-width(@a,@m,@g);
+	.g-grid-etc(@dir);
+}
+// <<<< 1st
+.g-grid-props(@a, @w, @m, @g, @c, @dir:left) when (@c = lead) and ((@m * @a + @g * (@a - 1)) < @w) {
+	clear:both;
+	.g-grid-width(@a,@m,@g);
+	.g-grid-etc(@dir);
+}
+// @@@@
+.g-grid-props(@a, @w, @m, @g, @c) when ((@m * @a + @g * (@a - 1)) >= @w) {
+	width:@w;
+	margin:0 auto;
+	.g-grid(clearfix);
+}
+
+// g
+.g(){
+	.g-grid();
+}
+.g(@a){
+	.g-grid(@a);
+}
+.g(@a, @b){
+	.g-grid(@a, @b);
+}
+.g(@a, @b, @c){
+	.g-grid(@a, @b, @c);
+}
+.g(@a, @b, @c, @d){
+	.g-grid(@a, @b, @c, @d);
+}
+.g(@a, @b, @c, @d, @e){
+	.g-grid(@a, @b, @c, @d, @e);
+}

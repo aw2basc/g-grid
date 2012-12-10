@@ -1,0 +1,265 @@
+/*
+Copyright (C) 2012 Justin Maxwell
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+section {
+  height: 10px;
+  background: grey;
+}
+body {
+  width: 978px;
+  margin: 0 auto;
+  zoom: 1;
+}
+body:before {
+  content: "";
+  display: table;
+}
+body:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.test1 {
+  margin-left: 30px;
+  width: 306px;
+  float: left;
+  display: inline;
+  min-height: 1px;
+}
+.test1 {
+  width: 978px;
+  margin: 0 auto;
+  zoom: 1;
+}
+.test1:before {
+  content: "";
+  display: table;
+}
+.test1:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.test2 {
+  width: 100%;
+  margin: 0 auto;
+  zoom: 1;
+}
+.test2:before {
+  content: "";
+  display: table;
+}
+.test2:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.test3 {
+  width: 100%;
+  margin: 0 auto;
+  zoom: 1;
+}
+.test3:before {
+  content: "";
+  display: table;
+}
+.test3:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.test4 {
+  margin-left: 30px;
+  width: 138px;
+  float: left;
+  display: inline;
+  min-height: 1px;
+}
+.test5 {
+  margin-left: 3.067484662576687%;
+  width: 14.110429447852761%;
+  float: left;
+  display: inline;
+  min-height: 1px;
+}
+.test6 {
+  clear: both;
+  width: 14.110429447852761%;
+  float: left;
+  display: inline;
+  min-height: 1px;
+}
+.test7 {
+  clear: both;
+  width: 14.110429447852761%;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test8 {
+  clear: both;
+  width: 14.110429447852761%;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test9 {
+  clear: both;
+  width: 14.110429447852761%;
+  float: left;
+  display: inline;
+  min-height: 1px;
+}
+.test1 {
+  clear: both;
+  width: 14.110429447852761%;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test2 {
+  clear: both;
+  width: 14.110429447852761%;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test3 {
+  margin-left: 3.067484662576687%;
+  width: 14.110429447852761%;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test4 {
+  margin-left: 3.067484662576687%;
+  width: 14.110429447852761%;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test5 {
+  margin-left: 3.067484662576687%;
+  width: 14.110429447852761%;
+  float: left;
+  display: inline;
+  min-height: 1px;
+}
+.test6 {
+  clear: both;
+  width: 14.110429447852761%;
+  float: left;
+  display: inline;
+  min-height: 1px;
+}
+.test7 {
+  clear: both;
+  width: 14.110429447852761%;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test8 {
+  clear: both;
+  width: 14.110429447852761%;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test9 {
+  clear: both;
+  width: 14.110429447852761%;
+  float: left;
+  display: inline;
+  min-height: 1px;
+}
+.test1 {
+  clear: both;
+  width: 14.110429447852761%;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test2 {
+  clear: both;
+  width: 14.110429447852761%;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test3 {
+  margin-left: 3.067484662576687%;
+  width: 14.110429447852761%;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test4 {
+  margin-left: 3.067484662576687%;
+  width: 14.110429447852761%;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test5 {
+  clear: both;
+  width: 138px;
+  float: left;
+  display: inline;
+  min-height: 1px;
+}
+.test6 {
+  clear: both;
+  width: 138px;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test7 {
+  clear: both;
+  width: 138px;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test8 {
+  clear: both;
+  width: 138px;
+  float: left;
+  display: inline;
+  min-height: 1px;
+}
+.test9 {
+  clear: both;
+  width: 138px;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test1 {
+  clear: both;
+  width: 138px;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test2 {
+  margin-left: 30px;
+  width: 138px;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
+.test3 {
+  margin-left: 30px;
+  width: 138px;
+  float: right;
+  display: inline;
+  min-height: 1px;
+}
