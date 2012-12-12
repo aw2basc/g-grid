@@ -10,30 +10,62 @@
 </pre>
 
 # g-grid
-g-grid is a css grid system with fluid and static widths meant to be used semantically as mixins within your stylesheet.  
-**requires [less](http://lesscss.org/ "less")**
+g-grid is a css grid system written in **[less](http://lesscss.org/ "less")**.  it supports fluid and static widths and is meant to be used as mixins within your stylesheet.  
+
+## usage
+`.g-grid(grid-system, num-columns[, fluid] [, lead] [, right]);` 
 
 ## features
 [semantic](#semantic)  
-[6 grid systems](#grids)  
 [static and fluid widths](#fluid)  
 [lead column adjustments](#lead)  
-[widths only](#only)  
-[padding only](#padding)  
+[all column specific styles](#all)  
 [float left/right](#right)  
 [shorthand](#shorthand)  
+[variables](#variables)  
+[6 grid systems](#grids)  
 
-## usage
-`.g-grid(num-columns, grid-system [, fluid] [, lead] [, right]);`  
-`.g-grid(padding, grid-system [, fluid]);`  
-`.g-grid(num-columns, grid-system [, fluid], only);`  
-`.g-grid(clearfix);`  
 
 ## <a name="semantic"></a> semantic
-g-grid is a system of mixins meant to be used semantically within your stylesheet.  
-Inspiration for this is from the semantic grid system from smashing magazine.  
-e.g `.container { .g-grid(3,978,lead); }`
+mixins keep presentation and markup separated and allow for more flexibility within media queries.
 
+
+## <a name="fluid"></a> static/fluid  
+by default, width and margin is in px.  
+`.g-grid(978,4); == width=306px; margin-left:30px; float:left; display:inline; min-height:1px;`  
+add fluid, get %  
+`.g-grid(978,4,fluid); == width=31.288343558282207%; margin-left:3.067484662576687%`  
+
+## <a name="lead"></a> lead  
+lead is the first column on the left  
+adds `clear:both;` and doesn't add `margin-left`  
+
+## <a name="all"></a> all  
+passing in 'all' instead of the column number returns the max width, `margin:0 auto;` and applies clearfix.  
+`.g-grid(978,all) == width:978px; ...`
+
+## <a name="right"></a> float left/right  
+by default, everything is `float:left;`  
+add the right argument and it changes to `float:right;`  
+
+## <a name="shorthand"></a> shorthand
+`.g() == .g-grid()` -> (e.g. .g(978,9); == .g-grid(978,9);)  
+`all/a == (max columns)` -> (e.g. `.g(978,all); == .g(978,12);`)  
+`1848 == WUXGA == hd == h` -> (e.g. `.g(h,2); == .g(1848,2);`)  
+`1314 == WXGA == wide == w`  
+`978 == XGA == desktop == d`  
+`748 == WVGA == tablet == t`  
+`460 == HVGA == portrait == p`  
+`300 == QVGA == mobile == m`  
+`fluid == f == flex` -> (e.g. `.g(978,2,f); == .g(978,2,fluid); `)  
+`lead == l == left` -> (e.g. `.g(978,2,l); == .g(978,2,lead);`)   
+
+## <a name="variables"></a> variables
+px and % widths are generated and available as variables  
+`width:@g-grid-748-4; == width:306px;`  
+the pattern is @g-grid-(grid system)-(x);  
+where x can be the number of columns, module, gutter or padding
+ 
 ## <a name="grids"></a> grids
 1848 - HD - WUXGA  
 `width:1848px;`  
@@ -77,52 +109,13 @@ e.g `.container { .g-grid(3,978,lead); }`
 `padding:10px;`  
 `columns:8;`  
 
-## <a name="fluid"></a> static/fluid  
-if you do not specify, width is returned in px.  
-adding fluid returns width in %.
-
-## <a name="lead"></a> lead  
-lead is the first column to the left  
-adds `clear:left;`
-
-## <a name="only"></a> only
-returns `width:x;` only
-
-## <a name="padding"></a> padding
-returns `padding-left:x; padding-right:x;`  
-
-## <a name="right"></a> float left/right  
-option to change to `float:right;`  
-
-## clearfix
-adds clearfix to the current container
-
-## <a name="shorthand"></a> shorthand
-`.g() == .g-grid()` -> (e.g. .g(9,978); == .g-grid(9,978);)  
-`all/a == (max columns)` -> (e.g. `.g(a,978); == .g(12,978);`)  
-`1848 == WUXGA == hd == h` -> (e.g. `.g(2,h); == .g(2,1848);`)  
-`1314 == WXGA == wide == w`  
-`978 == XGA == desktop == d`  
-`748 == WVGA == tablet == t`  
-`460 == HVGA == portrait == p`  
-`300 == QVGA == mobile == m`  
-`fluid == f == flex` -> (e.g. `.g(2,978,f); == .g(2,978,fluid); `)  
-`lead == l == left` -> (e.g. `.g(2,978,l); == .g(2,978,lead);`)  
-`only == o` -> (e.g. `.g(2,978,o); == .g(2,978,only);`)  
-`padding == p` -> (e.g. `.g(p,978); == .g(padding,978);`)  
-`clearfix == cf` -> (e.g. `.g(cf); == .g(clearfix);`)  
-
 ## examples
-`.g-grid(3, 978);` -> 3 cols in 978 grid  
-`.g-grid(4, 978, lead);` -> left side column   
-`.g-grid(4, 978, fluid);` -> 4 cols fluid  
-`.g-grid(all, 978);` -> max width 978  
-`.g-grid(4, 300, f, l);` -> left side 4 cols in fluid   
-`.g(p,XGA);` -> padding l&r in 978 grid  
-`.g(4,QVGA,f,o);` -> 4 col % wid only in 300 grid
- 
-## notes
+`.g-grid(978,3);` -> 3 cols in 978 grid  
+`.g-grid(978,4,lead);` -> left side column   
+`.g-grid(978,fluid);` -> 4 cols fluid  
+`.g-grid(978,all);` -> max width 978  
+`.g-grid(300,4,fluid,lead,right);` -> percent width, no margin-left, float right, 300 grid
 
-it is recommended to use this with box-sizing:border-box.  
-here's the paul irish snippet:  
-`* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }`
+## notes
+use this with `border-box`.   
+`.border-box { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }`
