@@ -1,0 +1,14 @@
+{
+  "name": "g-grid",
+  "version": "1.0.0",
+  "description": "fluid semantic grid",
+  "author": "aw2basc",
+  "license": "MIT",
+  "scripts": {
+  	"start": "node index.js"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/aw2basc/g-grid.git"
+  }
+}
